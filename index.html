@@ -1,0 +1,6530 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- MERCADO build: 2026-08-31-v6 (vÃ©rifiez cette ligne si le site
+     semble montrer une ancienne version aprÃ¨s une mise Ã  jour) -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>MERCADO</title>
+
+<style>
+:root{
+ --orange:#FF6B00;
+ --yellow:#FFEC6E;
+ --bg:#12100D;
+ --bg2:#1A140F;
+ --card:#211A13;
+ --hi:#2C2118;
+ --border:rgba(255,107,0,.22);
+ --text:#F2F1ED;
+ --dim:#B0A297;
+ --green:#33C77E;
+ --red:#FF4D4D
+}
+
+*{box-sizing:border-box}
+
+body{
+ margin:0;
+ background:var(--bg);
+ color:var(--text);
+ font-family:Inter,Arial,sans-serif;
+ padding-bottom:82px
+}
+
+.app{
+ max-width:520px;
+ margin:auto;
+ min-height:100vh;
+ border-left:1px solid var(--border);
+ border-right:1px solid var(--border)
+}
+
+/* HEADER */
+.util{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:8px 14px;
+ background:var(--bg2);
+ border-bottom:1px solid var(--border);
+ font-size:12px
+}
+
+.brand{
+ display:flex;
+ align-items:center;
+ gap:7px
+}
+
+.mercado-logo{
+ width:31px;
+ height:31px;
+ position:relative;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ background:#050505;
+ border-radius:8px
+}
+
+.mercado-logo svg{
+ position:absolute;
+ width:29px;
+ height:29px;
+ fill:none;
+ stroke:#ffc400;
+ stroke-width:2;
+ stroke-linecap:round;
+ stroke-linejoin:round
+}
+
+.mercado-logo b{
+ color:#ffc400;
+ font-size:14px;
+ position:relative;
+ z-index:1;
+ margin-top:7px
+}
+
+.logo-text{
+ font-weight:950;
+ letter-spacing:.3px
+}
+
+.header-actions{
+ display:flex;
+ align-items:center;
+ gap:5px
+}
+
+.header-actions select{
+ max-width:82px;
+ background:var(--card);
+ color:#fff;
+ border:1px solid var(--border);
+ border-radius:7px;
+ padding:6px 5px;
+ font-size:10px
+}
+
+.header-cart{
+ position:relative;
+ border:0;
+ background:var(--hi);
+ color:#fff;
+ border-radius:9px;
+ padding:7px 9px;
+ font-size:15px
+}
+
+.header-cart span{
+ position:absolute;
+ right:-5px;
+ top:-5px;
+ background:#e52d3f;
+ color:#fff;
+ border-radius:10px;
+ font-size:8px;
+ min-width:15px;
+ padding:2px 4px
+}
+
+/* BANNER */
+.banner-wrap{
+ position:relative;
+ height:116px;
+ overflow:hidden;
+ background:#fff
+}
+
+.banner-slide{
+ position:absolute;
+ inset:0;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ opacity:0;
+ pointer-events:none;
+ transition:opacity .55s ease
+}
+
+.banner-slide.active{
+ opacity:1;
+ pointer-events:auto
+}
+
+.banner-orange{background:var(--orange)}
+.banner-yellow{background:var(--yellow)}
+
+.banner-content{
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ gap:10px;
+ width:100%;
+ padding:12px 18px;
+ text-align:center
+}
+
+.banner-pill{
+ background:#fff;
+ color:#000;
+ border-radius:18px;
+ padding:5px 10px;
+ font-size:10px;
+ font-weight:900;
+ white-space:nowrap
+}
+
+.banner-title{
+ font-size:20px;
+ line-height:1.02;
+ font-weight:950;
+ color:#fff;
+ letter-spacing:-.5px
+}
+
+.banner-title.dark{
+ color:#000
+}
+
+.banner-icon{
+ font-size:39px
+}
+
+.banner-dots{
+ position:absolute;
+ bottom:6px;
+ left:0;
+ right:0;
+ display:flex;
+ justify-content:center;
+ gap:5px;
+ z-index:2
+}
+
+.banner-dot{
+ width:6px;
+ height:6px;
+ border-radius:50%;
+ background:#777;
+ border:0;
+ padding:0
+}
+
+.banner-dot.active{
+ background:#222;
+ transform:scale(1.2)
+}
+
+/* SEARCH */
+.search-zone{
+ padding:12px 14px
+}
+
+.search{
+ display:flex;
+ align-items:center;
+ gap:7px;
+ background:var(--card);
+ border:1.5px solid var(--border);
+ border-radius:24px;
+ padding:7px 8px 7px 13px
+}
+
+.search input{
+ flex:1;
+ background:none;
+ border:0;
+ outline:0;
+ color:#fff;
+ font-size:14px;
+ min-width:0
+}
+
+.icon{
+ border:0;
+ cursor:pointer
+}
+
+.camera{
+ width:31px;
+ height:31px;
+ border-radius:50%;
+ background:var(--orange);
+ color:#fff
+}
+
+.searchgo{
+ width:34px;
+ height:34px;
+ border-radius:10px;
+ background:var(--yellow);
+ color:#000;
+ font-size:17px
+}
+
+/* CATEGORIES */
+.cats-section{
+ padding:0 14px
+}
+
+.cats-title{
+ display:flex;
+ justify-content:space-between;
+ color:var(--dim);
+ font-size:12px;
+ font-weight:700;
+ text-transform:uppercase;
+ margin:5px 0 9px
+}
+
+.cats{
+ display:flex;
+ gap:8px;
+ overflow-x:auto;
+ padding-bottom:10px;
+ scrollbar-width:none
+}
+
+.cats::-webkit-scrollbar{
+ display:none
+}
+
+.chip{
+ flex-shrink:0;
+ background:var(--card);
+ border:1px solid var(--border);
+ color:var(--dim);
+ border-radius:20px;
+ padding:8px 12px;
+ font-size:11px;
+ cursor:pointer
+}
+
+.chip.active{
+ background:var(--orange);
+ border-color:var(--orange);
+ color:#fff
+}
+
+/* VIEWS */
+.view{
+ display:none;
+ padding:0 14px 22px
+}
+
+.view.active{
+ display:block
+}
+
+.section-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin:7px 0 10px
+}
+
+.section-head h2{
+ font-size:17px;
+ margin:0
+}
+
+.section-head span{
+ font-size:10px;
+ color:var(--dim)
+}
+
+/* PRODUCTS */
+.grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:11px
+}
+
+.card{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:12px;
+ overflow:hidden;
+ position:relative;
+ cursor:pointer;
+ transition:transform .15s ease
+}
+
+.card:active{
+ transform:scale(.985)
+}
+
+.card img{
+ width:100%;
+ aspect-ratio:1;
+ object-fit:cover;
+ display:block
+}
+
+.badge{
+ position:absolute;
+ top:8px;
+ left:8px;
+ background:#090909d9;
+ color:var(--yellow);
+ border:1px solid #ffec6e55;
+ border-radius:8px;
+ padding:4px 7px;
+ font-size:8px;
+ font-weight:800
+}
+
+.body{
+ padding:9px
+}
+
+.title{
+ font-size:12px;
+ line-height:1.35;
+ min-height:33px
+}
+
+.price{
+ color:var(--orange);
+ font-size:16px;
+ font-weight:800;
+ margin-top:4px
+}
+
+.meta{
+ font-size:9px;
+ color:var(--dim);
+ margin-top:3px
+}
+
+.card-hint{
+ font-size:9px;
+ color:var(--yellow);
+ font-weight:700;
+ margin-top:8px
+}
+
+/* PRODUCT */
+.back{
+ background:var(--card);
+ border:1px solid var(--border);
+ color:#fff;
+ border-radius:8px;
+ padding:8px 11px;
+ margin-bottom:10px
+}
+
+.hero{
+ width:100%;
+ aspect-ratio:1;
+ object-fit:cover;
+ border-radius:12px
+}
+
+.product-hero-wrap{
+ position:relative
+}
+
+.hero-overlay-top{
+ position:absolute;
+ top:10px;
+ left:10px;
+ right:10px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ z-index:5
+}
+
+.hero-icon-group{
+ display:flex;
+ gap:8px
+}
+
+.hero-icon-btn{
+ width:38px;
+ height:38px;
+ border-radius:50%;
+ background:#fff;
+ color:#111;
+ border:0;
+ font-size:17px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ cursor:pointer
+}
+
+.hero-pill{
+ position:absolute;
+ left:10px;
+ bottom:10px;
+ background:#000000a8;
+ color:#fff;
+ border-radius:16px;
+ padding:6px 12px;
+ font-size:11px;
+ font-weight:700;
+ display:flex;
+ gap:6px;
+ align-items:center;
+ z-index:5
+}
+
+.hero-pill-sep{
+ color:#aaa;
+ font-weight:400
+}
+
+.hero-heart{
+ position:absolute;
+ right:10px;
+ bottom:10px;
+ width:40px;
+ height:40px;
+ border-radius:50%;
+ background:#fff;
+ border:0;
+ font-size:19px;
+ color:#e5304a;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ cursor:pointer;
+ z-index:5
+}
+
+.trust-strip{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:12px;
+ margin:13px 0;
+ padding:12px
+}
+
+.trust-row{
+ font-size:11px;
+ color:var(--dim);
+ display:flex;
+ align-items:center;
+ gap:8px;
+ padding:5px 0
+}
+
+.trust-row span{
+ color:var(--green);
+ font-weight:800
+}
+
+.pd-title{
+ font-size:20px;
+ font-weight:800;
+ margin-top:10px
+}
+
+.pd-price{
+ font-size:26px;
+ font-weight:900;
+ color:var(--orange);
+ margin-top:4px
+}
+
+.choice{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:12px;
+ margin:13px 0;
+ padding:12px
+}
+
+.choice h3{
+ font-size:13px;
+ margin:0 0 6px;
+ color:var(--yellow)
+}
+
+.choice p{
+ font-size:11px;
+ color:var(--dim);
+ line-height:1.45;
+ margin:5px 0
+}
+
+.facts{
+ display:flex;
+ flex-wrap:wrap;
+ gap:5px;
+ margin-top:8px
+}
+
+.facts span{
+ font-size:9px;
+ background:#181818;
+ border:1px solid #333;
+ border-radius:12px;
+ padding:5px 7px;
+ color:#bbb
+}
+
+/* DELIVERY / TRUST BLOCK */
+.delivery-block{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:12px;
+ margin:13px 0;
+ padding:13px;
+ display:flex;
+ flex-direction:column;
+ gap:9px
+}
+
+.delivery-row{
+ display:flex;
+ align-items:flex-start;
+ gap:10px
+}
+
+.delivery-row .di{
+ width:26px;
+ height:26px;
+ border-radius:8px;
+ background:var(--hi);
+ color:var(--green);
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:14px;
+ flex-shrink:0
+}
+
+.delivery-row .dt{
+ flex:1;
+ min-width:0
+}
+
+.delivery-row .dt b{
+ font-size:12px;
+ display:block
+}
+
+.delivery-row .dt span{
+ font-size:10.5px;
+ color:var(--dim);
+ line-height:1.4;
+ display:block;
+ margin-top:2px
+}
+
+.delivery-row .dt .carriers{
+ display:flex;
+ gap:5px;
+ flex-wrap:wrap;
+ margin-top:6px
+}
+
+.delivery-row .dt .carriers em{
+ font-style:normal;
+ background:#181818;
+ border:1px solid #333;
+ color:#ddd;
+ border-radius:8px;
+ padding:4px 7px;
+ font-size:9px
+}
+
+.delivery-divider{
+ height:1px;
+ background:var(--border);
+ margin:1px 0
+}
+
+.delivery-link{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ font-size:11px;
+ font-weight:700;
+ cursor:pointer;
+ padding:2px 0
+}
+
+.delivery-link small{
+ color:var(--dim);
+ font-weight:500;
+ font-size:9.5px;
+ display:block;
+ margin-top:2px
+}
+
+.delivery-link .chev{
+ color:var(--dim);
+ font-size:13px
+}
+
+/* REVIEWS */
+.reviews-block{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:12px;
+ margin:13px 0;
+ padding:13px
+}
+
+.reviews-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center
+}
+
+.reviews-head h3{
+ font-size:14px;
+ margin:0;
+ color:var(--text)
+}
+
+.reviews-head .see-all{
+ font-size:10.5px;
+ color:var(--dim);
+ cursor:pointer
+}
+
+.reviews-summary{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ margin:11px 0
+}
+
+.rs-score{
+ font-size:30px;
+ font-weight:900;
+ color:var(--yellow);
+ line-height:1
+}
+
+.rs-stars{
+ font-size:12px;
+ color:var(--yellow);
+ margin-top:3px
+}
+
+.rs-count{
+ font-size:10px;
+ color:var(--dim);
+ margin-top:3px
+}
+
+.rs-bars{
+ flex:1;
+ display:flex;
+ flex-direction:column;
+ gap:3px
+}
+
+.rs-bar-row{
+ display:flex;
+ align-items:center;
+ gap:6px;
+ font-size:9px;
+ color:var(--dim)
+}
+
+.rs-bar-track{
+ flex:1;
+ height:5px;
+ background:#181818;
+ border-radius:4px;
+ overflow:hidden
+}
+
+.rs-bar-fill{
+ height:100%;
+ background:var(--yellow)
+}
+
+.review-tags{
+ display:flex;
+ flex-wrap:wrap;
+ gap:6px;
+ margin:10px 0
+}
+
+.review-tags span{
+ background:var(--hi);
+ border:1px solid var(--border);
+ color:var(--text);
+ border-radius:14px;
+ padding:6px 10px;
+ font-size:10px
+}
+
+.review-gallery{
+ display:flex;
+ gap:7px;
+ overflow-x:auto;
+ padding-bottom:4px;
+ margin-bottom:6px;
+ scrollbar-width:none
+}
+
+.review-gallery::-webkit-scrollbar{
+ display:none
+}
+
+.review-gallery img{
+ width:74px;
+ height:74px;
+ object-fit:cover;
+ border-radius:9px;
+ flex-shrink:0
+}
+
+.review-card{
+ padding:11px 0;
+ border-top:1px solid var(--border)
+}
+
+.review-card:first-of-type{
+ border-top:1px solid var(--border)
+}
+
+.review-top{
+ display:flex;
+ align-items:center;
+ gap:8px
+}
+
+.review-avatar{
+ width:26px;
+ height:26px;
+ border-radius:50%;
+ background:var(--orange);
+ color:#fff;
+ font-size:11px;
+ font-weight:800;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex-shrink:0
+}
+
+.review-name{
+ font-size:11px;
+ font-weight:700
+}
+
+.review-date{
+ font-size:9px;
+ color:var(--dim);
+ margin-left:auto
+}
+
+.review-stars{
+ font-size:10px;
+ color:var(--yellow);
+ margin:5px 0 4px
+}
+
+.review-text{
+ font-size:11px;
+ color:#dcd6cf;
+ line-height:1.5
+}
+
+.review-variant{
+ font-size:9px;
+ color:var(--dim);
+ margin-top:4px
+}
+
+.write-review-btn{
+ width:100%;
+ background:var(--hi);
+ color:#fff;
+ border:1px solid var(--border);
+ border-radius:10px;
+ padding:11px;
+ font-weight:800;
+ margin-top:11px;
+ cursor:pointer
+}
+
+/* WRITE REVIEW FORM */
+.review-form-wrap{
+ display:none;
+ margin-top:12px;
+ padding-top:12px;
+ border-top:1px solid var(--border)
+}
+
+.review-form-wrap.show{
+ display:block
+}
+
+.rf-stars{
+ display:flex;
+ gap:6px;
+ font-size:24px;
+ margin:6px 0 10px;
+ cursor:pointer
+}
+
+.rf-stars span{
+ color:#3a3a3a;
+ transition:color .1s
+}
+
+.rf-stars span.on{
+ color:var(--yellow)
+}
+
+.review-form-wrap textarea{
+ width:100%;
+ min-height:70px;
+ background:var(--bg2);
+ color:#fff;
+ border:1px solid var(--border);
+ border-radius:9px;
+ padding:10px;
+ font-family:inherit;
+ font-size:11px;
+ outline:0;
+ resize:vertical
+}
+
+.review-form-wrap .primary{
+ margin-top:9px
+}
+
+.qty{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:10px;
+ padding:9px 11px;
+ margin:12px 0
+}
+
+.qty button{
+ width:32px;
+ height:32px;
+ border-radius:50%;
+ border:1px solid var(--border);
+ background:var(--hi);
+ color:#fff;
+ font-size:18px;
+ cursor:pointer
+}
+
+.qty strong{
+ display:inline-block;
+ width:28px;
+ text-align:center
+}
+
+.primary{
+ width:100%;
+ background:var(--orange);
+ color:#fff;
+ border:0;
+ border-radius:10px;
+ padding:12px;
+ font-weight:800;
+ cursor:pointer
+}
+
+.secondary-cart,
+.share-main{
+ width:100%;
+ border:1px solid var(--border);
+ border-radius:10px;
+ padding:11px;
+ margin-top:7px;
+ font-weight:800;
+ cursor:pointer
+}
+
+.secondary-cart{
+ background:var(--hi);
+ color:#fff
+}
+
+.share-main{
+ background:transparent;
+ color:#fff
+}
+
+.share{
+ display:flex;
+ gap:6px;
+ flex-wrap:wrap;
+ margin:9px 0
+}
+
+.share-quick{
+ display:flex;
+ gap:7px;
+ margin-top:7px
+}
+
+.share-quick button{
+ flex:1;
+ background:var(--hi);
+ border:1px solid var(--border);
+ color:#fff;
+ border-radius:9px;
+ padding:9px;
+ font-size:11px;
+ font-weight:700;
+ cursor:pointer
+}
+
+.share button{
+ background:var(--card);
+ border:1px solid var(--border);
+ color:#fff;
+ border-radius:8px;
+ padding:8px 10px;
+ font-size:10px
+}
+
+/* CART */
+.item{
+ display:flex;
+ gap:10px;
+ align-items:center;
+ padding:11px 0;
+ border-bottom:1px solid var(--border)
+}
+
+.item img{
+ width:62px;
+ height:62px;
+ border-radius:8px;
+ object-fit:cover
+}
+
+.item-main{
+ flex:1
+}
+
+.item-title{
+ font-size:12px;
+ font-weight:600
+}
+
+.item-price{
+ font-size:11px;
+ color:var(--orange);
+ margin-top:3px
+}
+
+.cart-qty{
+ display:flex;
+ align-items:center;
+ gap:6px;
+ background:var(--bg2);
+ border:1px solid var(--border);
+ border-radius:7px;
+ padding:3px
+}
+
+.cart-qty button{
+ width:24px;
+ height:24px;
+ border-radius:50%;
+ border:1px solid var(--border);
+ background:var(--hi);
+ color:#fff
+}
+
+.total{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:12px;
+ padding:13px;
+ margin-top:13px
+}
+
+.total-line{
+ display:flex;
+ justify-content:space-between;
+ font-size:14px
+}
+
+.total-price{
+ color:var(--orange);
+ font-weight:800
+}
+
+/* FORMS */
+.panel{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:12px;
+ padding:14px
+}
+
+.panel h3{
+ margin:0 0 13px;
+ font-size:16px
+}
+
+.field{
+ margin-bottom:11px
+}
+
+.field label{
+ display:block;
+ font-size:10px;
+ color:var(--dim);
+ margin-bottom:4px
+}
+
+.field input,
+.field select{
+ width:100%;
+ background:var(--bg2);
+ color:#fff;
+ border:1px solid var(--border);
+ border-radius:8px;
+ padding:10px;
+ outline:0
+}
+
+.field-row{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:9px
+}
+
+.verify{
+ color:var(--green);
+ font-size:10px;
+ font-weight:700
+}
+
+.autocomplete{
+ position:relative
+}
+
+.suggestions{
+ position:absolute;
+ left:0;
+ right:0;
+ top:100%;
+ background:var(--hi);
+ border:1px solid var(--border);
+ border-radius:9px;
+ z-index:20;
+ overflow:hidden
+}
+
+.suggestion{
+ padding:10px;
+ font-size:11px;
+ border-bottom:1px solid var(--border);
+ cursor:pointer
+}
+
+.code{
+ display:flex;
+ gap:6px;
+ margin:8px 0
+}
+
+.code input{
+ width:38px;
+ text-align:center
+}
+
+.notice{
+ font-size:10px;
+ color:var(--dim);
+ background:var(--bg2);
+ padding:8px;
+ border-radius:7px;
+ margin-bottom:9px
+}
+
+/* AFFILIATE */
+.affiliate{
+ background:linear-gradient(135deg,#241708,#1b1f27);
+ border:1px solid var(--border);
+ border-radius:13px;
+ padding:28px 16px;
+ text-align:center
+}
+
+.affiliate .big{
+ font-size:45px
+}
+
+.affiliate h2{
+ margin:8px 0
+}
+
+.affiliate p{
+ color:var(--dim);
+ font-size:12px
+}
+
+/* INBOX */
+.inbox{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:10px;
+ padding:11px;
+ margin-bottom:8px
+}
+
+.inbox-title{
+ font-size:12px;
+ font-weight:700
+}
+
+.inbox-body{
+ font-size:10px;
+ color:var(--dim);
+ margin-top:4px
+}
+
+/* BOTTOM */
+.bottom{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ height:76px;
+ background:#151515;
+ border-top:1px solid #333;
+ z-index:40
+}
+
+.bottom-in{
+ max-width:520px;
+ margin:auto;
+ height:100%;
+ display:grid;
+ grid-template-columns:repeat(5,1fr)
+}
+
+.nav{
+ position:relative;
+ border:0;
+ background:none;
+ color:#eee;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ gap:3px;
+ font-size:9px
+}
+
+.nav .ni{
+ width:27px;
+ height:27px;
+ display:flex;
+ align-items:center;
+ justify-content:center
+}
+
+.nav .ni svg{
+ width:27px;
+ height:27px;
+ fill:none;
+ stroke:currentColor;
+ stroke-width:1.8;
+ stroke-linecap:round;
+ stroke-linejoin:round
+}
+
+.nav.active{
+ color:#72a7ff
+}
+
+.nav.active:before{
+ content:'';
+ position:absolute;
+ width:56px;
+ height:38px;
+ border-radius:20px;
+ background:#1b2a3c;
+ z-index:-1
+}
+
+.nav-badge{
+ position:absolute;
+ top:8px;
+ right:25%;
+ background:#e52d3f;
+ color:#fff;
+ border-radius:10px;
+ padding:2px 5px;
+ font-size:8px
+}
+
+/* AI */
+.ai-open{
+ position:fixed;
+ right:14px;
+ bottom:88px;
+ width:55px;
+ height:55px;
+ border-radius:16px;
+ border:1px solid #555;
+ background:#171717;
+ z-index:50;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex-direction:column;
+ color:#9ec5ff;
+ font-size:20px
+}
+
+.ai-open small{
+ font-size:7px;
+ color:#fff
+}
+
+.ai-box{
+ display:none;
+ position:fixed;
+ right:10px;
+ left:10px;
+ margin:0 auto;
+ bottom:148px;
+ width:min(400px,calc(100vw - 20px));max-height:min(600px,78dvh);
+ height:min(600px,78dvh);
+ background:#101010;
+ border:1px solid #444;
+ border-radius:18px;
+ z-index:60;
+ overflow:hidden;
+ transition:bottom .15s ease
+}
+
+.ai-box.show{
+ display:flex;
+ flex-direction:column
+}
+
+.ai-head{
+ padding:12px;
+ border-bottom:1px solid #333;
+ display:flex;
+ justify-content:space-between
+}
+
+.ai-brand{
+ display:flex;
+ gap:9px;
+ align-items:center
+}
+
+.ai-mini{
+ width:34px;
+ height:34px;
+ border-radius:11px;
+ background:radial-gradient(circle at 35% 30%,#fff,#9ec5ff 20%,#5536ff 55%,#171717 75%);
+ display:flex;
+ align-items:center;
+ justify-content:center
+}
+
+.ai-sub{
+ font-size:9px;
+ color:var(--green)
+}
+
+.ai-msg{
+ flex:1;
+ overflow:auto;
+ padding:11px
+}
+
+.msg{
+ max-width:90%;
+ padding:9px 10px;
+ border-radius:12px;
+ margin-bottom:8px;
+ font-size:11px;
+ line-height:1.5;
+ white-space:pre-wrap
+}
+
+.bot{
+ background:#1b1b1b;
+ border:1px solid #292929
+}
+
+.user{
+ background:#ff730d;
+ margin-left:auto
+}
+
+.ai-form{
+ display:flex;
+ gap:5px;
+ padding:8px;
+ border-top:1px solid #333
+}
+
+.ai-form input{
+ flex:1;
+ background:#1a1a1a;
+ color:#fff;
+ border:1px solid #444;
+ border-radius:10px;
+ padding:10px
+}
+
+.ai-form button{
+ width:40px;
+ border:0;
+ border-radius:10px;
+ background:var(--yellow)
+}
+
+.ai-suggest{
+ display:flex;
+ gap:5px;
+ overflow:auto;
+ padding:7px;
+ border-top:1px solid #292929
+}
+
+.ai-suggest button{
+ white-space:nowrap;
+ background:#1b1b1b;
+ color:#fff;
+ border:1px solid #444;
+ border-radius:14px;
+ padding:7px;
+ font-size:9px
+}
+
+.ai-grounding{
+ padding:8px 10px;
+ border-top:1px solid #292929;
+ background:#111;
+ display:flex;
+ gap:5px;
+ flex-wrap:wrap
+}
+
+.ground-chip{
+ background:#191919;
+ border:1px solid #333;
+ color:#bbb;
+ border-radius:12px;
+ padding:5px 7px;
+ font-size:9px
+}
+
+/* PAYMENT */
+.payment-security{
+ background:#f7f7f7;
+ color:#171717;
+ border-radius:13px;
+ padding:13px;
+ margin:13px 0
+}
+
+.payment-security p{
+ font-size:10px;
+ line-height:1.45;
+ color:#666
+}
+
+.security-title{
+ font-weight:900;
+ font-size:13px
+}
+
+.pay-icons{
+ display:flex;
+ gap:6px;
+ flex-wrap:wrap;
+ margin-top:9px
+}
+
+.pay-icons span{
+ background:#fff;
+ border:1px solid #ddd;
+ border-radius:7px;
+ padding:6px 8px;
+ font-size:9px;
+ font-weight:800
+}
+
+/* PHOTO */
+.photo-menu{
+ display:none;
+ position:fixed;
+ left:0;
+ right:0;
+ bottom:0;
+ width:100%;
+ border-radius:18px 18px 0 0;
+ padding:12px;
+ background:#111;
+ z-index:75
+}
+
+.photo-menu.show{
+ display:block
+}
+
+.camera-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ color:#fff;
+ margin-bottom:9px
+}
+
+.camera-head button{
+ background:none;
+ border:0;
+ color:#fff;
+ font-size:18px
+}
+
+.photo-menu video{
+ width:100%;
+ height:310px;
+ object-fit:cover;
+ border-radius:12px;
+ background:#000
+}
+
+.camera-controls{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:12px 3px 4px
+}
+
+.gallery-btn,
+.camera-close{
+ background:#292929;
+ color:#fff;
+ border:0;
+ border-radius:10px;
+ padding:10px
+}
+
+.shutter{
+ width:58px;
+ height:58px;
+ border-radius:50%;
+ background:#fff;
+ border:5px solid #777;
+ color:#111;
+ font-size:25px
+}
+
+/* SHARE */
+.share-modal{
+ position:fixed;
+ inset:0;
+ background:#0008;
+ z-index:100;
+ display:none;
+ align-items:flex-end
+}
+
+.share-modal.show{
+ display:flex
+}
+
+.share-sheet{
+ width:100%;
+ background:#fff;
+ color:#111;
+ border-radius:20px 20px 0 0;
+ padding:15px
+}
+
+.share-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ font-size:16px;
+ margin-bottom:12px
+}
+
+.share-head button{
+ border:0;
+ background:none;
+ font-size:20px
+}
+
+.share-grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:12px
+}
+
+.share-grid button{
+ background:#fafafa;
+ border:1px solid #e3e3e3;
+ border-radius:12px;
+ padding:13px 5px;
+ font-size:10px
+}
+
+.share-grid span{
+ display:block;
+ font-size:25px;
+ margin-bottom:5px
+}
+
+/* TRUST GATE */
+.trust-modal{
+ position:fixed;
+ inset:0;
+ background:#000a;
+ z-index:110;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ padding:18px
+}
+
+.trust-modal.show{
+ display:flex
+}
+
+.trust-sheet{
+ width:100%;
+ max-width:400px;
+ background:var(--card);
+ border:1px solid var(--border);
+ color:var(--text);
+ border-radius:18px;
+ padding:0;
+ overflow:hidden
+}
+
+.trust-welcome{
+ background:linear-gradient(120deg,var(--orange),#ff8c3a);
+ padding:18px 18px 16px;
+ display:flex;
+ align-items:center;
+ gap:11px
+}
+
+.trust-welcome .tw-logo{
+ width:38px;
+ height:38px;
+ border-radius:10px;
+ background:#050505;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex-shrink:0
+}
+
+.trust-welcome .tw-logo b{
+ color:#ffc400;
+ font-size:16px
+}
+
+.trust-welcome div b{
+ display:block;
+ font-size:15px;
+ color:#fff
+}
+
+.trust-welcome div span{
+ font-size:10.5px;
+ color:#fff0e2
+}
+
+.trust-body{
+ padding:17px
+}
+
+.trust-body h3{
+ font-size:15px;
+ margin:0 0 13px;
+ line-height:1.35
+}
+
+.trust-point{
+ display:flex;
+ gap:9px;
+ margin-bottom:13px;
+ align-items:flex-start
+}
+
+.trust-point span{
+ color:var(--green);
+ font-size:14px;
+ margin-top:1px;
+ flex-shrink:0
+}
+
+.trust-point p{
+ font-size:11.5px;
+ color:var(--dim);
+ line-height:1.5;
+ margin:0
+}
+
+.trust-body .primary{
+ margin-top:5px
+}
+
+.photo-preview{
+ display:none;
+ position:fixed;
+ left:50%;
+ top:50%;
+ transform:translate(-50%,-50%);
+ width:min(340px,90vw);
+ background:#171717;
+ border:1px solid #444;
+ border-radius:14px;
+ padding:12px;
+ z-index:80
+}
+
+.photo-preview.show{
+ display:block
+}
+
+.photo-preview img{
+ width:100%;
+ max-height:300px;
+ object-fit:contain;
+ border-radius:9px
+}
+
+.toast{
+ display:none;
+ position:fixed;
+ left:50%;
+ bottom:82px;
+ transform:translateX(-50%);
+ background:#222;
+ color:#fff;
+ padding:9px 13px;
+ border-radius:10px;
+ font-size:11px;
+ z-index:90
+}
+
+.toast.show{
+ display:block
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- HEADER -->
+<div class="util">
+
+<div class="brand">
+<div class="mercado-logo">
+<svg viewBox="0 0 40 40">
+<path d="M7 13h26l3 23H4z"/>
+<path d="M12 14V10a8 8 0 0 1 16 0v4"/>
+<path d="m11 18 9 12 9-12"/>
+</svg>
+<b>M</b>
+</div>
+
+<span class="logo-text">MERCADO</span>
+</div>
+
+<div class="header-actions">
+
+<button class="header-cart"
+onclick="show('cart')"
+aria-label="Panier">
+ðŸ›’
+<span id="headerCartBadge">0</span>
+</button>
+
+</div>
+</div>
+
+<!-- BANNER -->
+<div class="banner-wrap">
+
+<div class="banner-slide banner-orange active">
+<div class="banner-content">
+<div class="banner-pill">ðŸ·ï¸ MERCADO</div>
+<div class="banner-title">
+<span data-i18n-html="banner_free_shipping">Livraison gratuite<br>
+sur la 1Ã¨re commande</span>
+</div>
+<div class="banner-icon">ðŸšš</div>
+</div>
+</div>
+
+<div class="banner-slide banner-yellow">
+<div class="banner-content">
+<div class="banner-title dark">
+<span data-i18n-html="banner_exclusive">ExclusivitÃ©<br>
+nouvel acheteur</span>
+</div>
+<div class="banner-percent">70%</div>
+</div>
+</div>
+
+<div class="banner-dots">
+<button class="banner-dot active"></button>
+<button class="banner-dot"></button>
+</div>
+
+</div>
+
+<!-- SEARCH -->
+<div class="search-zone">
+<div class="search">
+
+<span>ðŸ”</span>
+
+<input
+id="searchInput"
+placeholder="Rechercher sur MERCADO..." data-i18n-ph="search_placeholder"
+onkeydown="if(event.key==='Enter')searchProducts()">
+
+<button
+class="icon camera"
+onclick="openPhotoMenu()">
+ðŸ“·
+</button>
+
+<button
+class="icon searchgo"
+onclick="searchProducts()">
+âŒ•
+</button>
+
+</div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="cats-section">
+
+<div class="cats-title">
+<span data-i18n="choose_category">Choisir une catÃ©gorie</span>
+<span data-i18n="catalog_word">Catalogue</span>
+</div>
+
+<div class="cats" id="cats"></div>
+
+</div>
+
+<!-- HOME -->
+<section id="home" class="view active">
+
+<div class="section-head">
+<h2 data-i18n="home_title">MERCADO â€” Pour vous</h2>
+<span id="productCount"></span>
+</div>
+
+<div id="catalogStatus" class="notice">
+Produits du catalogue MERCADO
+</div>
+
+<div id="notifyBox" class="notice" style="display:none;border-color:var(--yellow)">
+
+<div style="margin-bottom:8px">
+<span data-i18n="notify_text">Aucun produit trouvÃ© pour cette recherche. Soyez prÃ©venu(e) par
+email dÃ¨s qu'il sera disponible :</span>
+</div>
+
+<div class="field-row">
+<input id="notifyEmail" type="email" placeholder="vous@email.com" data-i18n-ph="ph_email" style="flex:1">
+<button class="btn btn-add" onclick="notifyMeAvailability()"><span data-i18n="notify_btn">M'avertir</span></button>
+</div>
+
+<div id="notifyStatus" style="font-size:11px;color:var(--dim);margin-top:6px"></div>
+
+</div>
+
+<div class="grid" id="productGrid"></div>
+
+</section>
+
+<!-- PRODUCT -->
+<section id="product" class="view"></section>
+
+<!-- CART -->
+<section id="cart" class="view">
+
+<div class="section-head">
+<h2 data-i18n="cart_title">Votre panier MERCADO</h2>
+<span id="cartCount"></span>
+</div>
+
+<div id="cartItems"></div>
+<div id="cartTotal"></div>
+
+</section>
+
+<!-- DELIVERY -->
+<section id="signup" class="view">
+
+<button class="back" onclick="show('cart')">
+â† Retour
+</button>
+
+<div class="panel">
+
+<div id="savedNotice"
+class="notice"
+style="display:none">
+âœ“ Adresse vÃ©rifiÃ©e enregistrÃ©e â€” elle ne vous sera plus redemandÃ©e.
+</div>
+
+<h3>
+<span data-i18n="delivery_info_title">Informations de livraison</span>
+<span
+id="verified"
+class="verify"
+style="display:none">
+âœ“ VÃ©rifiÃ©
+</span>
+</h3>
+
+<div class="field">
+<label data-i18n="label_fullname">Nom complet</label>
+<input id="name" placeholder="Votre nom" data-i18n-ph="ph_fullname" oninput="saveDraftField('mercado_name',this.value)">
+</div>
+
+<div class="field">
+
+<label data-i18n="label_email">Email</label>
+
+<input
+id="email"
+type="email"
+placeholder="vous@email.com" data-i18n-ph="ph_email"
+onblur="sendVerificationCode()">
+
+</div>
+
+<div class="field">
+<label data-i18n="label_country">Pays</label>
+<select id="country" aria-label="Pays"></select>
+</div>
+
+<div class="field">
+<label data-i18n="label_language">Langue</label>
+<select id="lang" aria-label="Langue"></select>
+</div>
+
+<div id="codeBox" style="display:none">
+
+<div class="notice">
+<span data-i18n="code_sent_notice">Un code de vÃ©rification a Ã©tÃ© envoyÃ© Ã  votre adresse email.</span>
+</div>
+
+<div class="code" id="codeInputs"></div>
+
+<button
+class="btn btn-add"
+style="width:100%"
+onclick="verifyCode()">
+<span data-i18n="verify_email_btn">VÃ©rifier l'email</span>
+</button>
+
+<div id="codeStatus"
+class="notice"
+style="margin-top:8px">
+</div>
+
+</div>
+
+<div class="field">
+
+<label data-i18n="label_phone">TÃ©lÃ©phone</label>
+
+<input
+id="phone"
+placeholder="+237 ..."
+oninput="saveDraftField('mercado_phone',this.value)">
+
+</div>
+
+<div class="field autocomplete">
+
+<label data-i18n="label_address">Adresse de livraison</label>
+
+<input
+id="address"
+placeholder="Commencez Ã  Ã©crire une ville ou une adresse..." data-i18n-ph="ph_address"
+oninput="addressInput(this.value);saveDraftField('mercado_address_draft',this.value)"
+autocomplete="off">
+
+<div id="suggestions"></div>
+
+</div>
+
+<div class="field-row">
+
+<div class="field">
+<label data-i18n="label_city">Ville</label>
+<input id="city" placeholder="Votre ville" data-i18n-ph="ph_city" oninput="saveDraftField('mercado_city_draft',this.value)">
+</div>
+
+<div class="field">
+<label data-i18n="label_zip">ZIP</label>
+<input id="zip" placeholder="00000" oninput="saveDraftField('mercado_zip_draft',this.value)">
+</div>
+
+</div>
+
+<button
+class="primary"
+onclick="submitSignup()">
+<span data-i18n="btn_continue">Continuer</span>
+</button>
+
+</div>
+</section>
+
+<!-- ADDRESS -->
+<section id="addressView" class="view">
+
+<button class="back" onclick="show('signup')">
+â† Retour
+</button>
+
+<div class="panel">
+
+<h3>
+<span data-i18n="address_confirmed_title">Adresse confirmÃ©e</span>
+<span class="verify">
+âœ“ VÃ©rifiÃ©
+</span>
+</h3>
+
+<div
+id="addressReadout"
+style="white-space:pre-line;font-size:12px;line-height:1.6">
+</div>
+
+<button
+class="primary"
+onclick="show('payment')">
+<span data-i18n="btn_confirm_continue">Confirmer &amp; continuer</span>
+</button>
+
+</div>
+
+</section>
+
+<!-- PAYMENT -->
+<section id="payment" class="view">
+
+<button class="back" onclick="show('addressView')">
+â† Retour
+</button>
+
+<div class="panel">
+
+<h3 data-i18n="payment_title">Paiement MERCADO</h3>
+
+<div class="field">
+
+<label data-i18n="label_method">MÃ©thode</label>
+
+<select
+id="payMethod"
+onchange="paymentFields()">
+
+<option>Gate Pay â€” Carte / Apple Pay / Google Pay / Crypto</option>
+<option>Virement bancaire</option>
+
+</select>
+
+</div>
+
+<div id="payFields"></div>
+
+<div id="paymentSecuritySlot"></div>
+
+<div id="payTotal" class="notice"></div>
+
+<button
+class="primary"
+onclick="pay()">
+<span data-i18n="btn_pay_now">Payer maintenant</span>
+</button>
+
+</div>
+</section>
+
+<!-- CONFIRM -->
+<section id="confirm" class="view">
+
+<div
+class="panel"
+style="text-align:center;padding:35px 15px">
+
+<div
+style="font-size:55px;color:var(--green)">
+âœ“
+</div>
+
+<h2 data-i18n="order_confirmed_title">Commande confirmÃ©e</h2>
+
+<div
+id="orderOut"
+class="notice">
+</div>
+
+<button
+class="primary"
+onclick="show('home')">
+<span data-i18n="btn_continue_shopping">Continuer mes achats</span>
+</button>
+
+</div>
+
+</section>
+
+<!-- ACCOUNT -->
+<section id="account" class="view">
+
+<div class="panel">
+
+<h3>
+<span data-i18n="my_mercado_title">My Mercado</span>
+
+<span
+id="emailBadge"
+class="verify"
+style="display:none">
+<span data-i18n="email_verified_badge">âœ“ Email vÃ©rifiÃ©</span>
+</span>
+
+</h3>
+
+<p
+style="font-size:11px;color:var(--dim)">
+<span data-i18n="account_desc">Vos informations et vos prÃ©fÃ©rences MERCADO.</span>
+</p>
+
+<button
+class="secondary-cart"
+style="margin-top:12px;width:100%"
+onclick="startNewSession()">
+<span data-i18n="new_session_btn">Nouvelle session (effacer mes informations sur ce tÃ©lÃ©phone)</span>
+</button>
+
+</div>
+
+</section>
+
+<!-- INBOX -->
+<section id="inbox" class="view">
+
+<div class="section-head">
+
+<h2 data-i18n="inbox_title">MERCADO Inbox</h2>
+
+<span id="inboxCount">
+5 nouvelles
+</span>
+
+</div>
+
+<div id="inboxList"></div>
+
+</section>
+
+<!-- AFFILIATE -->
+<section id="affiliate" class="view">
+
+<div class="affiliate">
+
+<div class="big">ðŸš§</div>
+
+<h2 data-i18n="affiliate_title">Programme Affiliate</h2>
+
+<p>
+<span data-i18n="not_available">Pas encore disponible.</span>
+</p>
+
+</div>
+
+</section>
+
+<!-- NAV -->
+<nav class="bottom">
+
+<div class="bottom-in">
+
+<button
+class="nav active"
+data-view="home"
+onclick="show('home')">
+
+<span class="ni">
+<svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4a2 2 0 0 1 2-2 2 2 0 0 1 2 2v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-9"/></svg>
+</span>
+
+</button>
+
+<button
+class="nav"
+data-view="account"
+onclick="show('account')">
+
+<span class="ni">
+<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><circle cx="12" cy="10" r="3.25"/><path d="M6.2 18.2a6.3 6.3 0 0 1 11.6 0"/></svg>
+</span>
+
+</button>
+
+<button
+class="nav"
+data-view="search"
+onclick="focusSearch()">
+
+<span class="ni">
+<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+</span>
+
+</button>
+
+<button
+class="nav"
+data-view="inbox"
+onclick="show('inbox')">
+
+<span class="ni">
+<svg viewBox="0 0 24 24"><path d="M18 16v-5a6 6 0 0 0-12 0v5l-1.5 2.5h15z"/><path d="M9.5 19a2.5 2.5 0 0 0 5 0"/></svg>
+</span>
+
+<span class="nav-badge" id="inboxBadge" style="display:none">0</span>
+
+</button>
+
+<button
+class="nav"
+data-view="affiliate"
+onclick="show('affiliate')">
+
+<span class="ni">
+<svg viewBox="0 0 24 24"><path d="M12.6 3.5 20 10.9a2 2 0 0 1 0 2.8L14.2 19.5a2 2 0 0 1-2.8 0L4 12.1V5a1.5 1.5 0 0 1 1.5-1.5z"/><circle cx="8.2" cy="8.7" r="1.2"/></svg>
+</span>
+
+</button>
+
+</div>
+</nav>
+
+<!-- AI BUTTON -->
+<button
+class="ai-open"
+onclick="toggleAI()"
+aria-label="MERCADO AI">
+
+<span>âœ¦</span>
+<small>AI</small>
+
+</button>
+
+<!-- AI -->
+<div id="aiBox" class="ai-box">
+
+<div class="ai-head">
+
+<div class="ai-brand">
+
+<div class="ai-mini">
+âœ¦
+</div>
+
+<div>
+
+<b>MERCADO AI Deep</b>
+
+<div class="ai-sub">
+â— Online â€¢ Analyse professionnelle
+</div>
+
+</div>
+
+</div>
+
+<button
+style="background:none;border:0;color:#fff;font-size:20px"
+onclick="toggleAI()">
+âœ•
+</button>
+
+</div>
+
+<div id="aiMsg" class="ai-msg"></div>
+
+<div id="aiGrounding" class="ai-grounding"></div>
+
+<div class="ai-suggest">
+
+<button onclick="askAI('Analyse ce produit en profondeur')">
+ðŸ“¦ Deep dive
+</button>
+
+<button onclick="askAI('Compare ce produit avec les meilleures alternatives')">
+âš– Comparer
+</button>
+
+<button onclick="askAI('Quel est le rapport qualitÃ© prix de ce produit ?')">
+ðŸ’° QualitÃ©/prix
+</button>
+
+<button onclick="askAI('Analyse la livraison et les dÃ©lais possibles')">
+ðŸšš Livraison
+</button>
+
+<button onclick="askAI('Quels sont les points Ã  vÃ©rifier avant achat ?')">
+ðŸ”Ž VÃ©rifier
+</button>
+
+</div>
+
+<form
+class="ai-form"
+onsubmit="event.preventDefault();askAI()">
+
+<input
+id="aiInput"
+placeholder="Posez votre question..."
+onkeydown="if(event.key==='Enter'){event.preventDefault();askAI();}">
+
+<button
+type="button"
+onclick="askAI()">âž¤</button>
+
+</form>
+
+</div>
+
+<!-- CAMERA -->
+<div id="photoMenu" class="photo-menu">
+
+<div class="camera-head">
+
+<b>Recherche par photo</b>
+
+<button onclick="closePhotoMenu()">
+âœ•
+</button>
+
+</div>
+
+<video
+id="cameraVideo"
+autoplay
+playsinline
+muted>
+</video>
+
+<div id="cameraFallbackNotice" class="notice" style="display:none">
+AperÃ§u camÃ©ra non disponible dans cette fenÃªtre. Utilisez "Prendre une photo" ci-dessous â€” l'appareil photo de votre tÃ©lÃ©phone s'ouvrira normalement.
+</div>
+
+<canvas
+id="cameraCanvas"
+hidden>
+</canvas>
+
+<div class="camera-controls">
+
+<button
+class="gallery-btn"
+onclick="useGallery()">
+ðŸ–¼ Galerie
+</button>
+
+<button
+class="shutter"
+onclick="captureCamera()">
+â—
+</button>
+
+<button
+class="camera-close"
+onclick="closePhotoMenu()">
+Fermer
+</button>
+
+</div>
+
+<button
+class="primary"
+style="margin-top:9px"
+onclick="cameraInput.click()">
+ðŸ“· Prendre une photo
+</button>
+
+</div>
+
+<input
+id="cameraInput"
+type="file"
+accept="image/*"
+capture="environment"
+hidden
+onchange="photoPicked(event)">
+
+<input
+id="galleryInput"
+type="file"
+accept="image/*"
+hidden
+onchange="photoPicked(event)">
+
+<div
+id="photoPreview"
+class="photo-preview">
+</div>
+
+<div id="toast" class="toast"></div>
+
+<!-- TRUST GATE -->
+<div id="trustModal" class="trust-modal">
+
+<div class="trust-sheet">
+
+<div class="trust-welcome">
+
+<div class="tw-logo"><b>M</b></div>
+
+<div>
+<b>ðŸ‘‹ Bienvenue sur MERCADO</b>
+<span>Votre achat est protÃ©gÃ© de bout en bout</span>
+</div>
+
+</div>
+
+<div class="trust-body">
+
+<h3>MERCADO protÃ¨ge vos donnÃ©es de paiement</h3>
+
+<div class="trust-point">
+<span>âœ“</span>
+<p>Vos donnÃ©es bancaires sont traitÃ©es selon la norme de sÃ©curitÃ© des donnÃ©es de l'industrie des cartes de paiement (PCI DSS).</p>
+</div>
+
+<div class="trust-point">
+<span>âœ“</span>
+<p>Toutes vos donnÃ©es sont sÃ©curisÃ©es et non compromises.</p>
+</div>
+
+<div class="trust-point">
+<span>âœ“</span>
+<p>Toutes les donnÃ©es sont cryptÃ©es.</p>
+</div>
+
+<div class="trust-point">
+<span>âœ“</span>
+<p>Vos donnÃ©es bancaires ne seront jamais utilisÃ©es de maniÃ¨re inappropriÃ©e ou vendues.</p>
+</div>
+
+<button class="primary" onclick="closeTrustGate(true)">
+Continuer en toute confiance
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+<script>
+
+/* =====================================================
+   PAYS
+===================================================== */
+
+const COUNTRIES = [
+
+['AF','ðŸ‡¦ðŸ‡« Afghanistan'],
+['AL','ðŸ‡¦ðŸ‡± Albania'],
+['DZ','ðŸ‡©ðŸ‡¿ Algeria'],
+['AO','ðŸ‡¦ðŸ‡´ Angola'],
+['AR','ðŸ‡¦ðŸ‡· Argentina'],
+['AU','ðŸ‡¦ðŸ‡º Australia'],
+['AT','ðŸ‡¦ðŸ‡¹ Austria'],
+['BE','ðŸ‡§ðŸ‡ª Belgium'],
+['BJ','ðŸ‡§ðŸ‡¯ Benin'],
+['BR','ðŸ‡§ðŸ‡· Brazil'],
+['BF','ðŸ‡§ðŸ‡« Burkina Faso'],
+['BI','ðŸ‡§ðŸ‡® Burundi'],
+['CA','ðŸ‡¨ðŸ‡¦ Canada'],
+['CM','ðŸ‡¨ðŸ‡² Cameroon'],
+['CF','ðŸ‡¨ðŸ‡« Central African Republic'],
+['TD','ðŸ‡¹ðŸ‡© Chad'],
+['CL','ðŸ‡¨ðŸ‡± Chile'],
+['CN','ðŸ‡¨ðŸ‡³ China'],
+['CO','ðŸ‡¨ðŸ‡´ Colombia'],
+['CD','ðŸ‡¨ðŸ‡© Congo, Democratic Republic'],
+['CG','ðŸ‡¨ðŸ‡¬ Congo, Republic'],
+['CI','ðŸ‡¨ðŸ‡® CÃ´te dâ€™Ivoire'],
+['HR','ðŸ‡­ðŸ‡· Croatia'],
+['CY','ðŸ‡¨ðŸ‡¾ Cyprus'],
+['CZ','ðŸ‡¨ðŸ‡¿ Czech Republic'],
+['DK','ðŸ‡©ðŸ‡° Denmark'],
+['EG','ðŸ‡ªðŸ‡¬ Egypt'],
+['FI','ðŸ‡«ðŸ‡® Finland'],
+['FR','ðŸ‡«ðŸ‡· France'],
+['GA','ðŸ‡¬ðŸ‡¦ Gabon'],
+['DE','ðŸ‡©ðŸ‡ª Germany'],
+['GH','ðŸ‡¬ðŸ‡­ Ghana'],
+['GR','ðŸ‡¬ðŸ‡· Greece'],
+['GN','ðŸ‡¬ðŸ‡³ Guinea'],
+['GW','ðŸ‡¬ðŸ‡¼ Guinea-Bissau'],
+['HT','ðŸ‡­ðŸ‡¹ Haiti'],
+['HK','ðŸ‡­ðŸ‡° Hong Kong'],
+['HU','ðŸ‡­ðŸ‡º Hungary'],
+['IN','ðŸ‡®ðŸ‡³ India'],
+['ID','ðŸ‡®ðŸ‡© Indonesia'],
+['IE','ðŸ‡®ðŸ‡ª Ireland'],
+['IL','ðŸ‡®ðŸ‡± Israel'],
+['IT','ðŸ‡®ðŸ‡¹ Italy'],
+['JP','ðŸ‡¯ðŸ‡µ Japan'],
+['KE','ðŸ‡°ðŸ‡ª Kenya'],
+['KR','ðŸ‡°ðŸ‡· South Korea'],
+['KW','ðŸ‡°ðŸ‡¼ Kuwait'],
+['MG','ðŸ‡²ðŸ‡¬ Madagascar'],
+['MW','ðŸ‡²ðŸ‡¼ Malawi'],
+['MY','ðŸ‡²ðŸ‡¾ Malaysia'],
+['ML','ðŸ‡²ðŸ‡± Mali'],
+['MT','ðŸ‡²ðŸ‡¹ Malta'],
+['MX','ðŸ‡²ðŸ‡½ Mexico'],
+['MA','ðŸ‡²ðŸ‡¦ Morocco'],
+['MZ','ðŸ‡²ðŸ‡¿ Mozambique'],
+['NL','ðŸ‡³ðŸ‡± Netherlands'],
+['NZ','ðŸ‡³ðŸ‡¿ New Zealand'],
+['NG','ðŸ‡³ðŸ‡¬ Nigeria'],
+['NO','ðŸ‡³ðŸ‡´ Norway'],
+['PK','ðŸ‡µðŸ‡° Pakistan'],
+['PE','ðŸ‡µðŸ‡ª Peru'],
+['PH','ðŸ‡µðŸ‡­ Philippines'],
+['PL','ðŸ‡µðŸ‡± Poland'],
+['PT','ðŸ‡µðŸ‡¹ Portugal'],
+['QA','ðŸ‡¶ðŸ‡¦ Qatar'],
+['RO','ðŸ‡·ðŸ‡´ Romania'],
+['RW','ðŸ‡·ðŸ‡¼ Rwanda'],
+['SA','ðŸ‡¸ðŸ‡¦ Saudi Arabia'],
+['SN','ðŸ‡¸ðŸ‡³ Senegal'],
+['RS','ðŸ‡·ðŸ‡¸ Serbia'],
+['SG','ðŸ‡¸ðŸ‡¬ Singapore'],
+['ZA','ðŸ‡¿ðŸ‡¦ South Africa'],
+['ES','ðŸ‡ªðŸ‡¸ Spain'],
+['SE','ðŸ‡¸ðŸ‡ª Sweden'],
+['CH','ðŸ‡¨ðŸ‡­ Switzerland'],
+['TW','ðŸ‡¹ðŸ‡¼ Taiwan'],
+['TZ','ðŸ‡¹ðŸ‡¿ Tanzania'],
+['TH','ðŸ‡¹ðŸ‡­ Thailand'],
+['TG','ðŸ‡¹ðŸ‡¬ Togo'],
+['TN','ðŸ‡¹ðŸ‡³ Tunisia'],
+['TR','ðŸ‡¹ðŸ‡· Turkey'],
+['UG','ðŸ‡ºðŸ‡¬ Uganda'],
+['UA','ðŸ‡ºðŸ‡¦ Ukraine'],
+['AE','ðŸ‡¦ðŸ‡ª United Arab Emirates'],
+['GB','ðŸ‡¬ðŸ‡§ United Kingdom'],
+['US','ðŸ‡ºðŸ‡¸ United States'],
+['UY','ðŸ‡ºðŸ‡¾ Uruguay'],
+['VE','ðŸ‡»ðŸ‡ª Venezuela'],
+['VN','ðŸ‡»ðŸ‡³ Vietnam'],
+['ZM','ðŸ‡¿ðŸ‡² Zambia'],
+['ZW','ðŸ‡¿ðŸ‡¼ Zimbabwe']
+
+];
+
+/* =====================================================
+   LANGUES
+===================================================== */
+
+const LANGS = [
+['fr','FranÃ§ais'],
+['en','English'],
+['de','Deutsch'],
+['es','EspaÃ±ol'],
+['it','Italiano'],
+['nl','Nederlands'],
+['pt','PortuguÃªs'],
+['pl','Polski'],
+['ja','æ—¥æœ¬èªž'],
+['zh','ä¸­æ–‡'],
+['ko','í•œêµ­ì–´'],
+['ar','Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©'],
+['ru','Ð ÑƒÑÑÐºÐ¸Ð¹']
+];
+
+const LANG_BY_COUNTRY = {
+CM:'fr',
+FR:'fr',
+CA:'fr',
+BE:'fr',
+CH:'fr',
+SN:'fr',
+CI:'fr',
+DE:'de',
+AT:'de',
+ES:'es',
+IT:'it',
+NL:'nl',
+PT:'pt',
+PL:'pl',
+JP:'ja',
+CN:'zh',
+KR:'ko',
+SA:'ar',
+AE:'ar',
+RU:'ru',
+US:'en',
+GB:'en',
+AU:'en',
+NZ:'en',
+IN:'en',
+IE:'en',
+SG:'en',
+MY:'en',
+PH:'en'};
+
+/* ========================================================
+   LIEUX
+   ======================================================= */
+
+const PLACES = [
+
+"Yaoundé, Centre, Cameroun – Bastos",
+"Yaoundé, Centre, Cameroun – Mvog-Ada",
+"Douala, Littoral, Cameroun – Bonapriso",
+"Douala, Littoral, Cameroun – Akwa",
+"Bamenda, Nord-Ouest, Cameroun",
+"Bafoussam, Ouest, Cameroun",
+"Paris, Île-de-France, France – 75001",
+"Lyon, Auvergne-Rhône-Alpes, France – 69001",
+"New York, NY, États-Unis – 10001",
+"Londres, Angleterre, Royaume-Uni — Westminster"
+
+];
+
+/* ========================================================
+   CATÉGORIES
+======================================================= */
+
+const CATS = [
+
+["Tous",ðŸŒŸ"],
+["Électronique",ðŸ"±"],
+["Mode",ðŸ'•"],
+["Accueil""],
+["Téléphones",ðŸ"²"],
+["Ordinateurs",ðŸ'»"],
+["Fitness",ðŸ'ª"],
+["Sports",âš½"],
+["Montres",âŒš"],
+["Beauté",ðŸ'„"],
+["Automobile""],
+["Jouets",ðŸ§¸"]
+
+];
+
+/* ========================================================
+   APERÇU DES PRODUITS
+======================================================= */
+
+soit PRODUITS = [
+
+{
+id:1,
+nom: "Montre élégante en acier inoxydable",
+chat : « Montres »,
+prix : 17,39,
+ancien : 24,90
+Note : 4,6
+vendus : 128,
+img:"https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=900",
+desc:"Montre élégante avec bracelet acier, design polyvalent."
+},
+
+{
+id:2,
+nom : « Montre connectée Bluetooth Écran HD »,
+chat : « Électronique »,
+prix : 29,99,
+vieux : 45 ans
+Note : 4,5
+vendus : 344,
+img:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=900",
+desc:"Montre connectée pour notifications et suivi quotidien."
+},
+
+{
+id:3,
+nom:"Sandales enfant confort été",
+chat : « Mode »,
+prix : 12,59,
+ancien : 18,90
+Note : 4,7
+vendus : 521,
+img:"https://images.unsplash.com/photo-1603487742131-4160ec999306?w=900",
+desc:"Sandales légères pour enfant, adaptées aux sorties d'été."
+},
+
+{
+id:4,
+name:"Écouteurs sans fil Bluetooth",
+chat : « Électronique »,
+prix : 19,99,
+ancien : 32,
+Note : 4,4
+vendus : 876,
+img:"https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=900",
+desc:"Écouteurs compacts avec connexion Bluetooth."
+},
+
+{
+id:5,
+name:"Sac à main tendance femme",
+chat : « Mode »,
+prix : 22,49,
+ancien : 35,90,
+Note : 4,6
+vendus : 209,
+img:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=900",
+desc:"Sac à main moderne pour usage quotidien."
+},
+
+{
+id:6,
+nom: "Lampe LED moderne rechargeable",
+chat : « Maison »,
+prix : 15,90,
+ancien : 26,
+Note : 4,5
+vendus : 164,
+img:"https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=900",
+desc:"Lampe LED rechargeable pour maison et bureau."
+},
+
+{
+id:7,
+nom:"Bande élastique fitness 5 niveaux",
+chat : « Fitness »,
+prix : 9,49,
+ancien : 15,90
+Note : 4,8
+vendus : 932,
+img:"https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=900",
+desc:"Bande de résistance multi-niveaux."
+},
+
+{
+id:8,
+nom:"Lunettes de soleil UV400",
+chat : « Mode »,
+prix : 8,99,
+ancien : 14,90,
+Note : 4,5
+vendus : 410,
+img:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=900",
+desc:"Lunettes de soleil au style classique."
+},
+
+{
+id:9,
+nom: "Kit accessoires voiture",
+cat:"Automobile",
+prix : 13,79,
+vieux : 21 ans,
+Note : 4,4
+vendu : 301,
+img:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900",
+desc:"Accessoires pratiques pour voiture."
+},
+
+{
+id:10,
+nom : « Coffret soin visage »,
+chat : « Beauté »,
+prix : 18,29,
+ancien : 27,5,
+Note : 4,7
+vendus : 267,
+img:"https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?w=900",
+desc:"Coffret de soins pour routine beauté."
+},
+
+{
+id:11,
+nom:"Jouet éducatif pour enfant",
+chat : « Jouets »,
+prix : 11,99,
+ancien : 19,99,
+Note : 4,6
+vendus : 188,
+img:"https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900",
+desc:"Jouet ludique et éducatif."
+},
+
+{
+id:12,
+nom:"Organisateur maison multifonction",
+chat : « Maison »,
+prix : 10,49,
+ancien : 16.9,
+Note : 4,5
+vendus : 145,
+img:"https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900",
+desc:"Organisateur compact pour la maison."
+}
+
+];
+
+/* ========================================================
+   BACKEND DE CONFIGURATION
+======================================================= */
+
+let activeCat="Tous";
+laisser courant=null;
+soit qty=1;
+let cart=[];
+let wishlist=new Set();
+soit reviewDraftRating=0;
+
+/* Stockage des avis par produit, indexés par l'identifiant du produit (chaîne de caractères) */
+soit REVIEWS = {};
+
+soit emailVerified =
+localStorage.getItem('mercado_email_verified')==='true';
+
+soit adresseVérifiée =
+!!localStorage.getItem('mercado_verified_address');
+
+/* ========================================================
+   ADRESSE DU BACKEND MERCADO
+   -> Mettez ici, UNE FOIS, l'adresse de votre backend Render
+      (ex. "https://mercado-backend-xxxx.onrender.com").
+      Ainsi TOUT LE MONDE qui visite le site (pas seulement
+      votre propre navigateur) se connecte automatiquement au
+      même backend – plus besoin de commander localStorage.
+   -> Laissez '' si vous n'avez pas encore déployé de backend.
+======================================================= */
+const DEFAULT_BACKEND = (window.MERCADO_BACKEND_URL || '');
+
+const MERCADO_CONFIG = {
+
+catalogApiBase :
+localStorage.getItem('mercado_api_base') ||
+DEFAULT_BACKEND ||
+((location.protocol==='http:' ||
+location.protocol==='https:')
+?location.origine:''),
+
+emailSendEndpoint :
+localStorage.getItem('mercado_email_send_endpoint') || '',
+
+emailVerifyEndpoint :
+localStorage.getItem('mercado_email_verify_endpoint') || '',
+
+placesEndpoint :
+localStorage.getItem('mercado_places_endpoint') || '',
+
+point de terminaison de recherche visuelle :
+localStorage.getItem('mercado_visual_search_endpoint') || '',
+
+notificationsEndpoint :
+localStorage.getItem('mercado_notifications_endpoint') || '',
+
+points de fin des avis :
+localStorage.getItem('mercado_reviews_endpoint') || '',
+
+aiEndpoint :
+localStorage.getItem('mercado_ai_endpoint') || '',
+
+point de fin de commande :
+localStorage.getItem('mercado_order_endpoint') || '',
+
+gatepayEndpoint :
+localStorage.getItem('mercado_gatepay_endpoint') || '',
+
+bankInfoEndpoint :
+localStorage.getItem('mercado_bank_info_endpoint') || '',
+
+point de terminaison notifySubscribe :
+localStorage.getItem('mercado_notify_subscribe_endpoint') || ''
+
+};
+
+/* Si non défini manuellement dans localStorage, ces chemins
+   pointent automatiquement vers le backend MERCADO (celui déployé
+   sur Render) via catalogApiBase + un chemin fixe. Il suffit de
+   déployer le serveur fourni séparément (mercado-backend/). */
+fonction apiUrl(chemin){
+soit b=MERCADO_CONFIG.catalogApiBase;
+retourner b?b.replace(/\/$/,'')+chemin:'';
+}
+si(!MERCADO_CONFIG.emailSendEndpoint)
+MERCADO_CONFIG.emailSendEndpoint=apiUrl('/api/email/send-code');
+if(!MERCADO_CONFIG.emailVerifyEndpoint)
+MERCADO_CONFIG.emailVerifyEndpoint=apiUrl('/api/email/verify');
+si(!MERCADO_CONFIG.orderEndpoint)
+MERCADO_CONFIG.orderEndpoint=apiUrl('/api/order');
+si(!MERCADO_CONFIG.gatepayEndpoint)
+MERCADO_CONFIG.gatepayEndpoint=apiUrl('/api/payment/gatepay');
+if(!MERCADO_CONFIG.bankInfoEndpoint)
+MERCADO_CONFIG.bankInfoEndpoint=apiUrl('/api/payment/bank-info');
+if(!MERCADO_CONFIG.notifySubscribeEndpoint)
+MERCADO_CONFIG.notifySubscribeEndpoint=apiUrl('/api/notifications/subscribe');
+si(!MERCADO_CONFIG.trackViewEndpoint)
+MERCADO_CONFIG.trackViewEndpoint=apiUrl('/api/product-view');
+si(!MERCADO_CONFIG.visualSearchEndpoint)
+MERCADO_CONFIG.visualSearchEndpoint=apiUrl('/api/ai/ask');
+si(!MERCADO_CONFIG.aiLogEndpoint)
+MERCADO_CONFIG.aiLogEndpoint=apiUrl('/api/ai/ask');
+if(!MERCADO_CONFIG.reviewsEndpoint)
+MERCADO_CONFIG.reviewsEndpoint=apiUrl('/api/reviews');
+if(!MERCADO_CONFIG.itemDetailEndpoint)
+MERCADO_CONFIG.itemDetailEndpoint=apiUrl('/api/ebay/item');
+if(!MERCADO_CONFIG.translateEndpoint)
+MERCADO_CONFIG.translateEndpoint=apiUrl('/api/translate');
+si(!MERCADO_CONFIG.aiEndpoint)
+MERCADO_CONFIG.aiEndpoint=apiUrl('/api/ai/ask');
+
+/* ========================================================
+   TRADUCTION RÉELLE DE L'INTERFACE
+   Dictionnaire statique pour les langues principales +
+   traduction automatique via le backend (/api/translate)
+   pour les autres langues, avec cache localStorage.
+======================================================= */
+
+const I18N_BASE_FR = {
+home_title:"MERCADO – Pour vous",
+Choose_category:"Choisir une catégorie",
+catalog_word:"Catalogue",
+search_placeholder:"Rechercher sur MERCADO...",
+Banner_free_shipping:"Livraison gratuite<br>sur la 1ère commande",
+Banner_exclusive:"Exclusivité<br>nouvel acheteur",
+cart_title:"Votre panier MERCADO",
+delivery_info_title:"Informations de livraison",
+label_fullname:"Nom complet",
+ph_fullname:"Votre nom",
+label_country:"Pays",
+label_email:"Courriel",
+ph_email:"vous@email.com",
+code_sent_notice:"Un code de vérification a été envoyé à votre adresse email.",
+verify_email_btn:"Vérifier l'email",
+label_phone:"Téléphone",
+label_address:"Adresse de livraison",
+ph_address:"Commencez à écrire une ville ou une adresse...",
+label_city:"Ville",
+ph_city:"Votre ville",
+label_language:"Langue",
+ph_city:"Votre ville",
+label_zip:"ZIP",
+btn_continue:"Continuer",
+address_confirmed_title:"Adresse confirmée",
+btn_confirm_continue:"Confirmateur et continu",
+payment_title:"Paiement MERCADO",
+label_method:"Méthode",
+btn_pay_now:"Payeur maintenant",
+order_confirmed_title:"Commande confirmée",
+btn_continue_shopping:"Continuer mes achats",
+my_mercado_title:"Mon Mercado",
+badge_email_vérifié:"â" Email vérifié",
+account_desc:"Vos informations et vos préférences MERCADO.",
+inbox_title:"Boîte de réception MERCADO",
+affiliate_title:"Programme d'affiliation",
+not_available:"Pas encore disponible.",
+notify_text:"Aucun produit trouvé pour cette recherche. Soyez prévenu(e) par email dès qu'il sera disponible :",
+notify_btn:"M'avertir",
+produits_mot:"produits",
+sold_word:"vendus",
+card_hint:"Découvrir le produit…",
+buy_now:"Acheter maintenant",
+add_to_cart:"Ajouter au panier",
+pay_direct:"Payeur directement sur MERCADO",
+share_word:"Partager",
+titres des avis : « Clients d'Avis »,
+chariot_vide:"Panier vide",
+cart_empty_notice:"Votre panier MERCADO est vide.",
+articles_word:"articles",
+total_word:"Total",
+vat_notice:"TVA et informations de livraison seront calculées avec les données du catalogue.",
+checkout_btn:"Passer la commande",
+write_review_btn:"Laisser un avis détaillé",
+your_rating:"Donnez votre note",
+review_placeholder:"Décrivez ce que vous avez pensé de ce produit : qualité, conformité, livraison, ce que vous en retenez...",
+publi_review:"Publier mon avis",
+new_session_btn:"Nouvelle session (effacer mes informations sur ce téléphone)",
+cat_All:"Tout",
+cat_Electronics:"électronique",
+cat_Fashion:"Mode",
+chat_Home:"Maison",
+cat_Phones:"Téléphones",
+cat_Ordinateurs:"Ordinateurs",
+cat_Fitness:"Fitness",
+cat_Sports:"Sport",
+cat_Montres:"Montres",
+cat_Beauty:"Beauté",
+cat_Automotive:"Auto",
+jouets_chats : "Jouets"
+};
+
+const I18N_STATIC = {
+
+fr: I18N_BASE_FR,
+
+en:{
+home_title:"MERCADO — Pour vous",
+choose_category:"Choisissez une catégorie",
+mot_catalogue:"Catalogue",
+search_placeholder:"Rechercher sur MERCADO...",
+banner_free_shipping:"Livraison gratuite sur votre première commande",
+banner_exclusive:"Nouveaux acheteurs<br>exclusif",
+titre_panier:"Votre panier MERCADO",
+delivery_info_title:"Informations de livraison",
+label_fullname:"Nom complet",
+ph_fullname:"Votre nom",
+label_country:"Pays",
+label_email:"Courriel",
+ph_email:"vous@email.com",
+code_sent_notice:"Un code de vérification a été envoyé à votre adresse e-mail.",
+verify_email_btn:"Vérifier l'adresse e-mail",
+label_phone:"Téléphone",
+label_address:"Adresse de livraison",
+ph_address:"Commencez à saisir une ville ou une adresse...",
+label_city:"Ville",
+ph_city:"Votre ville",
+label_language:"Langue",
+ph_city:"Votre ville",
+label_zip:"ZIP",
+btn_continue:"Continuer",
+address_confirmed_title:"Adresse confirmée",
+btn_confirm_continue:"Confirmer et continuer",
+titre_de_paiement:"Paiement MERCADO",
+label_method:"Méthode",
+btn_pay_now:"Payer maintenant",
+order_confirmed_title:"Commande confirmée",
+btn_continue_shopping:"Continuer vos achats",
+my_mercado_title:"Mon Mercado",
+badge_email_verified:"✔ Adresse électronique vérifiée",
+account_desc:"Vos informations et préférences MERCADO.",
+inbox_title:"Boîte de réception MERCADO",
+affiliate_title:"Programme d'affiliation",
+not_available:"Pas encore disponible.",
+notify_text:"Aucun produit ne correspond à cette recherche. Vous serez averti par e-mail dès qu'il sera disponible."
+notify_btn:"M'avertir",
+produits_mot:"produits",
+mot_vendu:"vendu",
+card_hint:"Découvrez le produit →",
+acheter_maintenant:"Acheter maintenant",
+ajouter_au_panier:"Ajouter au panier",
+pay_direct:"Payer directement sur MERCADO",
+share_word:"Partager",
+titres_avis:"Avis clients",
+panier_vide:"Panier vide",
+cart_empty_notice:"Votre panier MERCADO est vide.",
+articles_word:"articles",
+total_word:"Total",
+vat_notice:"Les informations relatives à la TVA et aux frais de livraison seront calculées à partir des données du catalogue.",
+bouton_de_paiement:"Paiement",
+write_review_btn:"Rédiger un avis détaillé",
+votre_évaluation:"Évaluez ce produit",
+review_placeholder:"Décrivez votre avis sur ce produit : qualité, précision, livraison, tout ce qui mérite d'être partagé...",
+publier_critique:"Publier ma critique",
+new_session_btn:"Nouvelle session (effacer mes informations de ce téléphone)",
+cat_All:"Tous",
+chat_Électronique:"Électronique",
+cat_Fashion:"Mode",
+chat_Accueil:"Accueil",
+cat_Phones:"Téléphones",
+chat_Ordinateurs:"Ordinateurs",
+cat_Fitness:"Fitness",
+cat_Sports:"Sports",
+cat_Montres:"Montres",
+chat_Beauté:"Beauté",
+cat_Automotive:"Automotive",
+jouets_chats : "Jouets"
+},
+
+es:{
+home_title:"MERCADO – Pour toi",
+Choose_category:"Sélectionner une catégorie",
+catalog_word:"Catalogue",
+search_placeholder:"Rechercher au MERCADO...",
+Banner_free_shipping:"Envío gratis<br>en tu 1er pedido",
+Banner_exclusive:"Exclusif<br>nouveau vendeur",
+cart_title:"Tu as un marché MERCADO",
+delivery_info_title:"Informations d'entrée",
+label_fullname:"Nombre complet",
+ph_fullname:"Ton nombre",
+label_country:"PaÃs",
+label_email:"Courriel",
+ph_email:"tu@email.com",
+code_sent_notice:"Vous avez envoyé un code de vérification à votre courrier.",
+verify_email_btn:"Vérifier l'adresse e-mail",
+label_phone:"Téléphone",
+label_address:"Direction de l'entrée",
+ph_address:"Ecrivez-vous dans une ville ou une direction...",
+label_city:"Ciudad",
+ph_city:"Tu ciudad",
+label_language:"Idioma",
+ph_city:"Tu ciudad",
+label_zip:"Code postal",
+btn_continue:"Continuer",
+address_confirmed_title:"Direction confirmée",
+btn_confirm_continue:"Confirmer et continuer",
+payment_title:"Pago MERCADO",
+label_method:"Méthode",
+btn_pay_now:"Pagar ahora",
+order_confirmed_title:"Commandement confirmé",
+btn_continue_shopping:"Assurer mon achat",
+my_mercado_title:"Mon Mercado",
+email_verified_badge:"â" Email verificado",
+account_desc:"Vous informations et préférences du MERCADO.",
+inbox_title:"Boîte de réception MERCADO",
+affilié_title:"Programme d'affiliation",
+not_available:"Aún no disponible.",
+notify_text:"Vous ne trouvez pas de produit pour cette recherche. Recevez un avis par e-mail au moment où il est disponible :",
+notify_btn:"Avisarme",
+produits_mot:"productos",
+sold_word:"vendus",
+card_hint:"Découvrir le produit â†'",
+buy_now:"Comprar ahora",
+add_to_cart:"AÃ±adir al carrito",
+pay_direct:"Payer directement au MERCADO",
+partager_mot:"Compartir",
+reviews_title:"Opinions des clients",
+cart_empty:"Carrito vacÃo",
+cart_empty_notice:"Votre marché MERCADO est vide.",
+articles_word:"artÃculos",
+total_word:"Total",
+vat_notice:"L'IVA et les données d'envoi sont calculées avec les données du catalogue.",
+checkout_btn:"Finaliser l'achat",
+write_review_btn:"Dejar un avis détaillé",
+your_rating:"Puntúa este producto",
+review_placeholder:"Décrivez ce que vous avez dit sur ce produit : qualité, fidélité à la description, expédition...",
+publi_review:"Publier mon opinion",
+new_session_btn:"Nouvelle session (emprunter mes données de ce téléphone)",
+cat_All:"À faire",
+cat_Electronics:"Electrónica",
+chat_Mode : "Moda",
+chat_Home:"Hogar",
+cat_Phones:"TélÃ©fonos",
+cat_Computers:"Ordenadores",
+cat_Fitness:"Fitness",
+cat_Sports:"Deportes",
+chat_Montres:"Relojes",
+cat_Beauty:"Belleza",
+cat_Automotive:"Automoción",
+jouets_chats : "Juguetes"
+},
+
+de:{
+home_title:"MERCADO – Pour cela",
+Choose_category:"Catégorie wählen",
+catalog_word:"Catalogue",
+search_placeholder:"Au MERCADO tel que...",
+Banner_free_shipping:"Versand sans frais<br>au 1. Bestellung",
+Banner_exclusive:"Exclusif<br>pour Neukunden",
+cart_title:"Dein MERCADO-Warenkorb",
+delivery_info_title:"Lieferinformations",
+label_fullname:"Nom du Vollständiger",
+ph_fullname:"Nom Dein",
+label_country:"Terre",
+label_email:"Courriel",
+ph_email:"du@email.com",
+code_sent_notice:"Un meilleur code est créé pour votre adresse e-mail.",
+verify_email_btn:"Meilleur e-mail",
+label_phone:"Téléphone",
+label_address:"Adresse de vie",
+ph_address:"Ville ou adresse disponible...",
+label_city:"Stadt",
+ph_city:"Deine Stadt",
+label_language:"Sprache",
+ph_city:"Deine Stadt",
+label_zip:"PLZ",
+btn_continue:"Suite",
+address_confirmed_title:"Adresse la meilleure",
+btn_confirm_continue:"Meilleur et plus",
+payment_title:"MERCADO Zahlung",
+label_method:"Méthode",
+btn_pay_now:"Jetzt bezahlen",
+order_confirmed_title:"Meilleur prix",
+btn_continue_shopping:"Nous avons un achat",
+my_mercado_title:"Mon Mercado",
+email_verified_badge:"âœ" Meilleur e-mail",
+account_desc:"Deine MERCADO-Informationen und -Einstellungen.",
+inbox_title:"Boîte de réception MERCADO",
+affilié_title:"Programme partenaire",
+not_available:"Noch nicht verfügbar.",
+notify_text:"Un produit pour ce type de financement. Vous l'avez reçu par e-mail, il est indiqué ici :",
+notify_btn:"Avertir",
+produits_word:"Produkte",
+sold_word:"verkauft",
+card_hint:"Produkt entdecken â†'",
+acheter_maintenant:"Jetzt kaufen",
+add_to_cart:"Dans le Warenkorb",
+pay_direct:"Direction au MERCADO près",
+share_word:"Partager",
+reviews_title:"Consultations d'art",
+chariot_vide:"Warenkorb leer",
+cart_empty_notice:"Le MERCADO-Warenkorb est lu.",
+articles_word:"Article",
+total_word:"Gesamt",
+vat_notice:"MwSt. et Versandinformationen werden anhand der Katalogdaten berechnet.",
+checkout_btn:"Zur Kasse",
+write_review_btn:"Ausführliche Bewertung schreiben",
+your_rating:"Bewerte ce produit",
+review_placeholder:"Beschreibe deine Erfahrung: Qualität, Übereinstimmung mit der Beschreibung, Versand...",
+publi_review:"Bewertung veröffentlichen",
+new_session_btn:"Neue Sitzung (meine Daten auf cesem Handy löschen)",
+cat_All:"Alle",
+chat_Électronique:"Elektronik",
+cat_Fashion:"Mode",
+cat_Home:"Zuhause",
+cat_Phones:"Handys",
+cat_Computers:"Ordinateur",
+cat_Fitness:"Fitness",
+cat_Sports:"Sport",
+cat_Montres:"Uhren",
+chat_Beauté:"Beauté",
+cat_Automotive:"Auto",
+jouets_pour_chats : "Spielzeug"
+},
+
+il:{
+home_title:"MERCADO – Pour toi",
+Choose_category:"Choisir une catégorie",
+catalog_word:"Catalogue",
+search_placeholder:"À propos de votre MERCADO...",
+Banner_free_shipping:"Livraison gratuite<br>sur le 1° ordre",
+Banner_exclusive:"Esclusiva<br>nuovo acquirente",
+cart_title:"Votre carrello MERCADO",
+delivery_info_title:"Informations de consommation",
+label_fullname:"Nom complet",
+ph_fullname:"Il tuo nome",
+label_country:"Paese",
+label_email:"Courriel",
+ph_email:"tu@email.com",
+code_sent_notice:"Un code de vérification est envoyé à votre adresse e-mail.",
+verify_email_btn:"Vérifier l'e-mail",
+label_phone:"Téléphone",
+label_address:"Indirizzo di consegna",
+ph_address:"Inizia a digitare una città o un indirizzo...",
+label_city:"Cité ",
+ph_city:"La tua cittÃ ",
+label_language:"Lingua",
+ph_city:"La tua cittÃ ",
+label_zip:"CAP",
+btn_continue:"Continua",
+address_confirmed_title:"Indirizzo confirmato",
+btn_confirm_continue:"Confirmation et continuité",
+payment_title:"Paiement MERCADO",
+label_method:"Méthode",
+btn_pay_now:"Paga ora",
+order_confirmed_title:"Ordine confirmé",
+btn_continue_shopping:"Continuer mes achats",
+my_mercado_title:"Mon Mercado",
+email_verified_badge:"â" Email verificata",
+account_desc:"Vos informations et préférences MERCADO.",
+inbox_title:"Boîte de réception MERCADO",
+affilié_title:"Programme d'affiliation",
+not_available:"Non disponible disponible.",
+notify_text:"Nessun produit trouvé pour cette course. Vous recevrez un avis par e-mail non disponible:",
+notify_btn:"Avvisami",
+produits_mot:"prodotti",
+sold_word:"venduti",
+card_hint:"Recherchez le produit â†'",
+buy_now:"Acquista ora",
+add_to_cart:"Ajouter au carrello",
+pay_direct:"Paga directement sur MERCADO",
+share_word:"Condividi",
+reviews_title:"Recensions des clients",
+cart_empty:"Carrello vuoto",
+cart_empty_notice:"Votre carrello MERCADO est vu.",
+articles_word:"articles",
+total_word:"Total",
+vat_notice:"IVA et informations d'expédition seront calculées dans la base des données du catalogue.",
+checkout_btn:"Procédez à l'ordre",
+write_review_btn:"Écrivez une critique détaillée",
+your_rating:"Valuta ce produit",
+review_placeholder:"Description des choses à penser : qualité, correspondance avec la description, livraison...",
+publier_review:"Publier ma critique",
+new_session_btn:"Nouvelle session (annuler mes données sur ce téléphone)",
+cat_All:"Tutti",
+cat_Electronics:"Elettronica",
+chat_Mode : "Moda",
+chat_Maison:"Casa",
+cat_Phones:"Telefoni",
+cat_Computers:"Ordinateur",
+cat_Fitness:"Fitness",
+cat_Sports:"Sport",
+cat_Montres:"Orologi",
+cat_Beauty:"Bellezza",
+cat_Automotive:"Auto",
+jouets pour chats : « Giocattoli »
+},
+
+pt:{
+home_title:"MERCADO – Pour vous",
+Choose_category:"Escoler une catégorie",
+catalog_word:"Catalogue",
+search_placeholder:"Rechercher sur le MERCADO...",
+Banner_free_shipping:"Frais gratuit<br>pas de 1º commande",
+banner_exclusive:"Exclusif<br>novo comprador",
+cart_title:"Seu carrinho MERCADO",
+delivery_info_title:"Informations de livraison",
+label_fullname:"Nom complet",
+ph_fullname:"Seu nom",
+label_country:"PaÃs",
+label_email:"Courriel",
+ph_email:"voce@email.com",
+code_sent_notice:"Un code de vérification a été envoyé pour votre e-mail.",
+verify_email_btn:"Vérifier l'adresse e-mail",
+label_phone:"Téléphone",
+label_address:"EndereÃ§o de entrega",
+ph_address:"Venir numériser une ville ou un pays...",
+label_city:"Cidade",
+ph_city:"Sua citade",
+label_language:"Idioma",
+ph_city:"Sua citade",
+label_zip:"CEP",
+btn_continue:"Continuer",
+address_confirmed_title:"EndereÃ§o confirméado",
+btn_confirm_continue:"Confirmer et continuer",
+payment_title:"Paiement MERCADO",
+label_method:"Méthode",
+btn_pay_now:"Payer maintenant",
+order_confirmed_title:"Commandement confirmé",
+btn_continue_shopping:"Continuer l'achat",
+my_mercado_title:"Mon Mercado",
+email_verified_badge:"â" Email verificado",
+account_desc:"Vos informations et préférences MERCADO.",
+inbox_title:"Boîte de réception MERCADO",
+affilié_title:"Programme d'affiliation",
+not_available:"Ainda nÃ£o disponible.",
+notify_text:"Nenhum produit trouvé pour cette recherche. Seja avisado por email asim que estiver disponível:",
+notify_btn:"Avisar-moi",
+produits_mot:"produtos",
+sold_word:"vendus",
+card_hint:"Découvrir le produit â†'",
+buy_now:"Comprar agora",
+add_to_cart:"Ajouter à Carrinho",
+pay_direct:"Payer directement sur le MERCADO",
+share_word:"Partager",
+reviews_title:"Avaliaçàs de clientses",
+chariot_vide:"Carrinho vazio",
+cart_empty_notice:"Seu carrinho MERCADO está vazio.",
+articles_word:"itens",
+total_word:"Total",
+vat_notice:"L'IVA et les informations d'envoi seront calculées avec les données du catalogue.",
+checkout_btn:"Finaliser la commande",
+write_review_btn:"Deixar uma avaliação detalhada",
+your_rating:"Avalie ce produit",
+review_placeholder:"Découvrez votre expérience : qualité, fidélité et description, expédition...",
+publi_review:"Publicar minha avaliação",
+new_session_btn:"Nouvelle session (apagar minhas informaças deste telefone)",
+cat_All:"Tudo",
+cat_Electronics:"EletrÃ´nicos",
+chat_Mode : "Moda",
+chat_Maison:"Casa",
+cat_Phones:"Celulares",
+chat_Ordinateurs:"Computadores",
+cat_Fitness:"Fitness",
+cat_Sports:"Esportes",
+cat_Montres:"RelÃ³gios",
+cat_Beauty:"Beleza",
+cat_Automotive:"Automotivo",
+jouets_chats : "Brinquedos"
+}
+
+};
+
+soit i18nCurrentDict={};
+
+fonction t(clé){
+retourner (i18nCurrentDict&&i18nCurrentDict[clé])||I18N_BASE_FR[clé]||clé;
+}
+
+fonction asynchrone applyLanguage(code){
+
+soit dict=
+I18N_STATIC[code]||
+JSON.parse(localStorage.getItem('mercado_i18n_'+code)||'null');
+
+si(!dict){
+
+dict=await fetchTranslationDict(code);
+
+}
+
+i18nCurrentDict=dict||I18N_BASE_FR;
+
+renderTranslations();
+
+/* Le contenu généré dynamiquement (cartes produits, catégories,
+panier, fiche produit ouverte) n'est pas découvert par data-i18n â€”
+on le régénère pour qu'il change de langue lui aussi. */
+renderCats();
+
+rendre(
+activeCat==="Tous"
+PRODUITS
+:PRODUITS.filter(p=>p.cat===activeCat)
+);
+
+afficherPanier();
+
+si(actuel)
+ouvrirProduit(actuel.id);
+
+}
+
+fonction asynchrone fetchTranslationDict(code){
+
+if(!MERCADO_CONFIG.translateEndpoint)
+renvoyer I18N_BASE_FR;
+
+essayer{
+
+let keys=Object.keys(I18N_BASE_FR);
+let texts=keys.map(k=>I18N_BASE_FR[k]);
+
+let r=await fetch(MERCADO_CONFIG.translateEndpoint,{
+méthode : 'POST',
+en-têtes : {'Content-Type':'application/json'},
+corps:JSON.stringify({cible:code,textes:textes})
+});
+
+let d=await r.json();
+
+si (!r.ok||!Array.isArray(d.translations))
+lancer une nouvelle erreur();
+
+soit dict={};
+clés.forEach((k,i)=>dict[k]=d.translations[i]||I18N_BASE_FR[k]);
+
+localStorage.setItem('mercado_i18n_'+code,JSON.stringify(dict));
+
+renvoyer le dictionnaire ;
+
+}
+attraper(e){
+
+renvoyer I18N_BASE_FR;
+
+}
+
+}
+
+fonction renderTranslations(){
+
+document.querySelectorAll('[data-i18n]').forEach(el=>{
+soit k=el.getAttribute('data-i18n');
+si(i18nCurrentDict[k])
+el.textContent=i18nCurrentDict[k];
+});
+
+document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+soit k=el.getAttribute('data-i18n-html');
+si(i18nCurrentDict[k])
+el.innerHTML=i18nCurrentDict[k];
+});
+
+document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+soit k=el.getAttribute('data-i18n-ph');
+si(i18nCurrentDict[k])
+el.setAttribute('placeholder',i18nCurrentDict[k]);
+});
+
+}
+
+/* ========================================================
+   INITIALISATION
+======================================================= */
+
+fonction init(){
+
+pays.innerHTML =
+PAYS
+.map(x=>`<option value="${x[0]}">${x[1]}</option>`)
+.rejoindre("");
+
+lang.innerHTML =
+LANGUES
+.map(x=>`<option value="${x[0]}">${x[1]}</option>`)
+.rejoindre("");
+
+pays.valeur =
+localStorage.mercado_country || "CM";
+
+lang.value =
+localStorage.mercado_lang ||
+LANG_PAR_PAYS[pays.valeur] ||
+"fr";
+
+pays.onchange=()=>{
+
+localStorage.mercado_country=country.value;
+
+si(LANG_BY_COUNTRY[pays.valeur]&&
+!localStorage.mercado_lang_manual){
+
+lang.value=
+LANG_PAR_PAYS[pays.valeur];
+
+localStorage.mercado_lang=
+lang.valeur;
+
+}
+
+appliquerLangue(lang.valeur);
+
+chargerCatalogue(searchInput.value.trim());
+
+};
+
+lang.onchange=()=>{
+localStorage.mercado_lang=lang.value;
+localStorage.mercado_lang_manual='1';
+appliquerLangue(lang.valeur);
+};
+
+renderCats();
+rendre(PRODUITS);
+mettre à jour le panier();
+champs de paiement() ;
+renderInbox();
+restaurerAdresseEnregistrée();
+bienvenueIA();
+appliquerLangue(lang.valeur);
+chargerCatalogue();
+
+}
+
+/* ========================================================
+   CATÉGORIES
+======================================================= */
+
+fonction renderCats(){
+
+chats.innerHTML =
+CATS.map(x=>`
+
+< bouton
+classe="puce ${x[0]===activeCat?'active':''}"
+onclick="setCat('${x[0]}')">
+
+${x[1]} ${t('cat_'+x[0])}
+
+</button>
+
+`).join("");
+
+}
+
+fonction setCat(c){
+
+activeCat=c;
+
+renderCats();
+
+rendre(
+c==="Tous"
+PRODUITS
+:PRODUITS.filter(p=>p.cat===c)
+);
+
+afficher("maison");
+
+}
+
+/* ========================================================
+   PRODUITS
+======================================================= */
+
+fonction escapeHTML(s){
+
+renvoyer String(s??'')
+.replace(/[&<>'"]/g,m=>({
+
+'&':'&',
+'<':'<',
+'>':'>',
+"'):''',
+'"':'"'
+
+}[m]));
+
+}
+
+fonction render(liste){
+
+productCount.textContent =
+(liste||[]).longueur+" "+t('products_word');
+
+productGrid.innerHTML =
+(liste||[])
+.map(p=>`
+
+<article
+classe="carte"
+onclick="openProduct('${String(p.id)}')">
+
+<div class="badge">
+MARCHÉ
+</div>
+
+<img
+src="${p.img}"
+alt="${escapeHTML(p.name)}"
+chargement="paresseux">
+
+<div class="body">
+
+<div class="title">
+${escapeHTML(p.name)}
+</div>
+
+<div class="prix">
+${Number(p.price||0).toFixed(2)}
+</div>
+
+<div class="meta">
+
+${p.rating?'â˜… '+p.rating:''}
+
+${p.sold?' • '+p.sold+' '+t('sold_word'):''}
+
+</div>
+
+<div class="card-hint">
+${t('card_hint')}
+</div>
+
+</div>
+
+</article>
+
+`).join("");
+
+}
+
+/* ========================================================
+   CATALOGUE EN DIRECT
+======================================================= */
+
+soit lastSearchQuery='';
+
+fonction asynchrone notifyMeAvailability(){
+
+let e=(notifyEmail.value||'').trim();
+
+if(!e||!e.includes('@')){
+notifyStatus.textContent='Entrez un email valide.';
+retour;
+}
+
+if(!MERCADO_CONFIG.notifySubscribeEndpoint){
+notifyStatus.textContent=
+'Service de notification non configuré.';
+retour;
+}
+
+notifyStatus.textContent='Envoi…';
+
+essayer{
+
+let r=await fetch(MERCADO_CONFIG.notifySubscribeEndpoint,{
+méthode : 'POST',
+en-têtes : {'Content-Type':'application/json'},
+corps:JSON.stringify({email:e,query:lastSearchQuery})
+});
+
+if(!r.ok)throw new Error();
+
+notifyStatus.textContent=
+'âœ“ Vous serez averti(e) par email dÃ¨s qu\'un produit correspondant sera disponible.';
+
+notifyEmail.value='';
+
+let savedSubs=JSON.parse(localStorage.getItem('mercado_notify_subs')||'[]');
+savedSubs.push(lastSearchQuery||e);
+localStorage.setItem('mercado_notify_subs',JSON.stringify(savedSubs.slice(-20)));
+
+renderInbox();
+
+}
+catch(err){
+
+notifyStatus.textContent=
+'Impossible d'enregistrer votre demande pour le moment.';
+
+}
+
+}
+
+fonction asynchrone chargerCatalogue(q=''){
+
+laissez base=MERCADO_CONFIG.catalogApiBase;
+
+si(!base){
+rendre(PRODUITS);
+retour;
+}
+
+essayer{
+
+soit ctx=
+'&pays='+encodeURIComponent(pays.valeur)+
+'&lang='+encodeURIComponent(lang.value);
+
+soit url =
+base.replace(/\/$/,'')+
+(
+q
+?'/api/products/search?q='+
+encodeURIComponent(q)+
+'&limit=48'+ctx
+:'/api/products?limit=48'+ctx
+);
+
+let r=await fetch(url);
+
+si(!r.ok)
+lancer une nouvelle erreur();
+
+let d=await r.json();
+
+soit items=d.items||d.products||[];
+
+si (!items.length){
+dernièreRequêteDeRecherche=q;
+notifyBox.style.display=q?'block':'none';
+rendre([]);
+catalogStatus.textContent=
+q?'Aucun produit trouvé pour "'+q+'".':'Aucun produit disponible.';
+retour;
+}
+
+notifyBox.style.display='none';
+
+PRODUITS =
+items.map((x,i)=>({
+
+id:x.id||x.itemId||'live-'+i,
+
+nom:x.nom||x.titre||'Produit MERCADO',
+
+cat:x.category||x.cat||'Général',
+
+prix:(Nombre(x.prix)||0)+6,
+
+note:Nombre(x.note)||0,
+
+vendu :Nombre(x.vendu)||0,
+
+img:x.image||x.imageUrl||x.thumbnail||'',
+
+desc:x.description||x.desc||'',
+
+itemUrl:x.itemUrl||x.url||'',
+
+expédition:x.expédition||''
+
+}));
+
+rendre(PRODUITS);
+
+catalogStatus.textContent =
+PRODUITS.longueur+
+' produits chargés depuis le catalogue MERCADO.';
+
+}
+attraper(e){
+
+rendre(PRODUITS);
+
+catalogStatus.textContent =
+'Catalogue live indisponible â€” aperÃ§u local conservÃ©.';
+
+dernièreRequêteDeRecherche=q;
+notifyBox.style.display=q?'block':'none';
+
+}
+
+}
+
+/* ========================================================
+   DÉTAILS DU PRODUIT
+======================================================= */
+
+fonction openProduct(id){
+
+courant =
+PRODUITS.trouver(
+p=>String(p.id)===String(id)
+);
+
+si(!actuel)
+retour;
+
+quantité=1;
+Évaluation du brouillon = 0 ;
+
+/* Si le client a déjà rensigné son email, sur note discrètement
+qu'il a consulté ce produit. Le backend s'en sert pour lui envoyer,
+plus tard, un rappel par email ("vous avez récemment consulté...")
+s'il n'a pas fini par commandant. */
+si(email&&email.value&&email.value.inclut('@')&&MERCADO_CONFIG.trackViewEndpoint){
+
+récupérer(MERCADO_CONFIG.trackViewEndpoint,{
+méthode : 'POST',
+en-têtes : {'Content-Type':'application/json'},
+corps:JSON.stringify({
+email:email.value.trim(),
+produit:{
+id:current.id,
+nom:current.name,
+prix : prix actuel,
+image:current.img,
+itemUrl:current.itemUrl||''
+}
+})
+}).catch(()=>{});
+
+}
+
+produit.innerHTML=`
+
+<div class="product-hero-wrap">
+
+<div class="hero-overlay-top">
+
+< bouton
+classe="hero-icon-btn"
+onclick="afficher('accueil')"
+aria-label="Retour">
+â€¹
+</button>
+
+<div class="hero-icon-group">
+
+< bouton
+classe="hero-icon-btn"
+onclick="focusSearch()"
+aria-label="Chercheur">
+ðŸ”
+</button>
+
+< bouton
+classe="hero-icon-btn"
+onclick="openShareModal()"
+aria-label="Partager">
+un†-
+</button>
+
+</div>
+
+</div>
+
+<img
+classe="héros"
+src="${current.img}"
+alt="${escapeHTML(current.name)}">
+
+<div class="hero-pill">
+Article 1/1
+<span class="hero-pill-sep">|</span>
+Taille
+</div>
+
+< bouton
+id="heroHeart"
+classe="héros-cœur"
+onclick="toggleWishlist('${current.id}')"
+aria-label="Ajouter aux favoris">
+${wishlist.has(String(current.id))?'â™¥':'â™¡'}
+</button>
+
+</div>
+
+<div class="pd-title">
+${escapeHTML(current.name)}
+</div>
+
+
+<div class="pd-price">
+${Number(current.price||0).toFixed(2)}
+</div>
+
+<div class="meta product-meta">
+
+${current.rating?'â˜… '+current.rating:''}
+
+${current.sold?' • '+current.sold+' ventes':''}
+
+• MARCHÉ
+
+</div>
+
+<div class="choix">
+
+<h3>
+✓ Sélection MERCADO
+</h3>
+
+<p>
+${escapeHTML(
+desc.actuel||
+'Informations détaillées disponibles depuis le catalogue connecté.'
+)}
+</p>
+
+<div class="faits">
+
+<span>âœ" Catalogue</span>
+<span>âœ“ Informations produit</span>
+<span>âœ“ Livraison à vérifier</span>
+
+</div>
+
+</div>
+
+${deliveryBlockHTML()}
+<div class="qty">
+
+<b>Quantité</b>
+
+<div>
+
+< bouton
+onclick="changeQty(-1)">
+un'
+</button>
+
+<strong id="pdQty">
+1
+</strong>
+
+< bouton
+onclick="changeQty(1)">
++
+</button>
+
+</div>
+
+</div>
+
+< bouton
+classe="bouton d'achat principal"
+onclick="openTrustGate(acheterProduit)">
+
+${t('acheter_maintenant')}
+
+</button>
+
+< bouton
+classe="secondaire-cart"
+onclick="openTrustGate(()=>addToCart(current.id,qty))">
+
+ï¼‹ ${t('add_to_cart')}
+
+</button>
+
+< bouton
+classe="secondaire-cart"
+onclick="openTrustGate(payDirect)">
+
+ðŸ'³ ${t('pay_direct')}
+
+</button>
+
+< bouton
+classe="partage-main"
+onclick="openShareModal()">
+
+→ ${t('share_word')}
+
+</button>
+
+<div class="share-quick">
+
+<button onclick="shareWhatsApp()">
+ðŸŸ¢ WhatsApp
+</button>
+
+<bouton onclick="shareFacebook()">
+Facebook
+</button>
+
+</div>
+
+${reviewsBlockHTML(current.id)}
+
+<div class="choix">
+
+<div class="ai-inline">
+
+<div class="ai-mini">
+✔
+</div>
+
+<div>
+
+<h3>
+MERCADO AI Profond
+</h3>
+
+<p>
+Analyse, comparaison et réponses basées sur les données disponibles.
+</p>
+
+</div>
+
+</div>
+
+< bouton
+classe="question-ai"
+onclick="
+basculeAI();
+définirTimeout(
+()=>demanderAI(
+'Analyser ce produit en profondeur et indiquer les informations manquantes'
+),
+150
+)">
+
+Poser une question à MERCADO AI
+
+</button>
+
+</div>
+
+<div class="trust-strip">
+
+<div class="trust-row">
+<span>âœ"</span> Retour gratuit dans les 15 j.
+</div>
+
+<div class="trust-row">
+<span>âœ"</span> Sécurité et vie privée – vos données ne sont pas partagées
+</div>
+
+<div class="trust-row">
+<span>âœ"</span> Paiement traité par votre prestataire connecté
+</div>
+
+</div>
+
+`;
+
+afficher("produit");
+
+mettre à jour le contexte AI();
+
+chargerRealReviews(current.id);
+chargerRealItemRating(current.id);
+
+}
+
+/* ========================================================
+   BLOC DE LIVRAISON / DE CONFIANCE
+======================================================= */
+
+fonction estimationDelivraison(){
+
+let start=new Date();
+début.setDate(début.getDate()+6);
+
+let end=new Date();
+fin.setDate(fin.getDate()+11);
+
+const mois=[
+'janv.','févr.','mars','avr.','mai','juin',
+'juil.','aôt','sept.','oct.','nov.','déc.'
+];
+
+soit sameMonth = start.getMonth()===end.getMonth();
+
+let startStr = start.getDate()+(sameMonth?'':' '+months[start.getMonth()]);
+let endStr = end.getDate()+' '+months[end.getMonth()];
+
+retourner startStr+' - '+endStr;
+
+}
+
+fonction deliveryBlockHTML(){
+
+retourner `
+
+<div class="delivery-block">
+
+<div class="delivery-row">
+
+<div class="di">ðŸšš</div>
+
+<div class="dt">
+
+<b>Livraison gratuite à partir de 10,00 € d'achat</b>
+
+<span>Livraison estimée : ${estimatedDeliveryRange()}</span>
+
+<div class="carriers">
+<em>Colissimo</em>
+<em>Colis Privé</em>
+<em>Relais Mondial</em>
+</div>
+
+</div>
+
+</div>
+
+<div class="delivery-divider"></div>
+
+<div class="delivery-link" onclick="showToast('Détails de livraison à confirmer avec le vendeur connecté')">
+
+<div>
+Livraison rapide disponible
+<small>Coupon si retard, remboursement si colis endommagé</small>
+</div>
+
+<span class="chev">â€º</span>
+
+</div>
+
+<div class="delivery-divider"></div>
+
+<div class="delivery-link" onclick="showToast('Retour gratuit sous 15 jours après réception')">
+
+<div>
+Retour gratuit sous 15 j.
+<small>Remboursement si l'article ne convient pas</small>
+</div>
+
+<span class="chev">â€º</span>
+
+</div>
+
+<div class="delivery-divider"></div>
+
+<div class="delivery-link" onclick="showToast('MERCADO ne partage pas vos données personnelles')">
+
+<div>
+Sécurité et vie privée
+<small>Paiements sûrs – vos informations sont protégées</small>
+</div>
+
+<span class="chev">â€º</span>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+/* ========================================================
+   AVIS / COMMENTAIRES
+======================================================= */
+
+fonction seedReviews(pid){
+
+si(REVUES[pid])
+renvoyer REVIEWS[pid];
+
+REVUES[pid]=[
+
+{
+nom : 'A***e',
+initiale : 'A',
+étoiles : 5,
+date:'12 août 2026',
+text:"Très satisfait(e), correspondent exactement à la description. Livraison plus rapide que prévu.",
+variante:''
+},
+
+{
+nom : 'M***d',
+initiale : 'M',
+étoiles : 5,
+date:'2 août 2026',
+text:"Bonne qualité pour le prix. Je recommande, l'emballage était soigné.",
+variante:''
+},
+
+{
+nom : 'K***o',
+initiale : 'K',
+étoiles : 4,
+date : '27 juil. 2026',
+text:"Conforme à mes attentes. Le délai de livraison était correct.",
+variante:''
+}
+
+];
+
+renvoyer REVIEWS[pid];
+
+}
+
+fonction reviewsBlockHTML(pid){
+
+let list = seedReviews(pid);
+
+soit avg = current.rating
+? Nombre(évaluation actuelle)
+: (liste.reduce((s,r)=>s+r.stars,0)/liste.length);
+
+soit total = courant.vendu
+? Math.max(list.length, Math.round(current.sold*0.08))
+: liste.longueur;
+
+soit dist=[5,4,3,2,1].map(star=>{
+soit c = list.filter(r=>r.stars===star).length;
+soit pct = Math.round((c/list.length)*100)||0;
+renvoyer {étoile,pct};
+});
+
+retourner `
+
+<div class="reviews-block" id="reviewsBlock">
+
+<div class="reviews-head">
+<h3>${t('reviews_title')}</h3>
+<span class="see-all" onclick="showToast('Affichage de tous les avis à connecter au backend')">Voir tout (${total}) â€º</span>
+</div>
+
+<div class="reviews-summary">
+
+<div style="text-align:center">
+<div class="rs-score">${avg.toFixed(1)}</div>
+<div class="rs-stars">${starString(Math.round(avg))}</div>
+<div class="rs-count">${total} avis</div>
+</div>
+
+<div class="rs-bars">
+${dist.map(d=>`
+<div class="rs-bar-row">
+<span>${d.star}â˜…</span>
+<div class="rs-bar-track"><div class="rs-bar-fill" style="width:${d.pct}%"></div></div>
+</div>
+`).join('')}
+</div>
+
+</div>
+
+<div class="review-tags">
+<span>qualité (${Math.max(1,Math.round(list.length*0.6))})</span>
+<span>conforme à la description (${Math.max(1,Math.round(list.length*0.4))})</span>
+<span>livraison rapide (${Math.max(1,Math.round(list.length*0.3))})</span>
+</div>
+
+<div id="reviewCards">
+${list.map(reviewCardHTML).join('')}
+</div>
+
+<button class="write-review-btn" onclick="toggleReviewForm()">
+→ ${t('write_review_btn')}
+</button>
+
+<div class="review-form-wrap" id="reviewFormWrap">
+
+<b style="font-size:12px">${t('votre_évaluation')}</b>
+
+<div class="rf-stars" id="rfStars">
+${[1,2,3,4,5].map(n=>`<span data-n="${n}" onclick="setDraftRating(${n})">â˜…</span>`).join('')}
+</div>
+
+<textarea id="reviewText" placeholder="${t('review_placeholder')}"></textarea>
+
+<button class="primary" onclick="submitReview('${pid}')">${t('publish_review')}</button>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+fonction starString(n){
+retourner 'â˜…â˜…â˜…â˜…â˜…'.slice(0,n)+'â˜†â˜†â˜†â˜†â˜†'.slice(0,5-n);
+}
+
+fonction reviewCardHTML(r){
+
+retourner `
+
+<div class="review-card">
+
+<div class="review-top">
+<div class="review-avatar">${escapeHTML(r.initial||r.name[0]||'?')}</div>
+<div class="review-name">${escapeHTML(r.name)}</div>
+<div class="review-date">${escapeHTML(r.date)}</div>
+</div>
+
+<div class="review-stars">${starString(r.stars)}</div>
+
+<div class="review-text">${escapeHTML(r.text)}</div>
+
+${r.variant?`<div class="review-variant">${escapeHTML(r.variant)}</div>`:''}
+
+</div>
+
+`;
+
+}
+
+fonction toggleReviewForm(){
+
+reviewFormWrap.classList.toggle('show');
+
+}
+
+fonction setDraftRating(n){
+
+reviewDraftRating=n;
+
+[...rfStars.children].forEach(
+s=>s.classList.toggle('on', Number(s.dataset.n)<=n)
+);
+
+}
+
+fonction asynchrone chargerRealItemRating(pid){
+
+if(!MERCADO_CONFIG.itemDetailEndpoint||!current)
+retour;
+
+essayer{
+
+soit r=attendre fetch(
+MERCADO_CONFIG.itemDetailEndpoint+
+'/' + encodeURIComponent(pid)+
+'?pays='+encodeURIComponent(pays.valeur)
+);
+
+let d=await r.json();
+
+si(!r.ok||!d.rating)
+retour;
+
+// Note eBay réelle (agréée) â€” remplace notre estimation locale
+// dÃ¨s qu'elle existe. eBay ne fournit pas le texte des avis via
+// cette API, seulement la moyenne et le nombre d'avis.
+note actuelle=d.note;
+si(d.sold)current.sold=d.sold;
+
+si(String(current.id)===String(pid)){
+let block=document.getElementById('reviewsBlock');
+si(bloc)
+bloc.outerHTML=reviewsBlockHTML(pid);
+}
+
+}
+attraper(e){}
+
+}
+
+fonction asynchrone chargerRealReviews(pid){
+
+if(!MERCADO_CONFIG.reviewsEndpoint)
+retour;
+
+essayer{
+
+soit r=attendre fetch(
+MERCADO_CONFIG.reviewsEndpoint+
+'?productId='+
+encodeURIComponent(pid)
+);
+
+let d=await r.json();
+
+si (!r.ok||!Array.isArray(d.reviews)||!d.reviews.length)
+retour;
+
+// Les vrais avis (envoyés par de vrais clients) remplacent les
+// avis d'exemple dÃ¨s qu'il y en a au moins un pour ce produit.
+REVUES[pid]=d.reviews;
+
+si(actuel&&String(actuel.id)===String(pid)){
+let block=document.getElementById('reviewsBlock');
+si(bloc)
+bloc.outerHTML=reviewsBlockHTML(pid);
+}
+
+}
+attraper(e){}
+
+}
+
+fonction asynchrone submitReview(pid){
+
+let text = reviewText.value.trim();
+
+si(!reviewDraftRating){
+showToast('Choisissez une note avant de publier');
+retour;
+}
+
+si(!texte){
+showToast('Ajoutez un commentaire avant de publier');
+retour;
+}
+
+soit newReview = {
+nom : 'Vous',
+Initiale : 'V',
+étoiles : évaluation préliminaire,
+date: 'à l'instant',
+texte : texte,
+variante : ''
+};
+
+si(MERCADO_CONFIG.reviewsEndpoint){
+
+essayer{
+
+let r = await fetch(MERCADO_CONFIG.reviewsEndpoint,{
+méthode : 'POST',
+en-têtes : {'Content-Type':'application/json'},
+corps : JSON.stringify({ productId : pid, ...newReview })
+});
+
+if(!r.ok) throw new Error();
+
+}
+attraper(e){
+
+showToast('Avis enregistré localement – ​​service avis non connecté');
+
+}
+
+}
+
+seedReviews(pid).unshift(newReview);
+
+reviewText.value='';
+Évaluation du brouillon = 0 ;
+
+ouvrirProduit(pid);
+
+showToast('âœ“ Merci pour votre avis');
+
+}
+
+/* ========================================================
+   QUANTITÉ
+======================================================= */
+
+fonction toggleWishlist(id){
+
+id=String(id);
+
+si(liste de souhaits.a(id)){
+
+wishlist.supprimer(id);
+
+showToast('Retiré des favoris');
+
+}
+autre{
+
+wishlist.add(id);
+
+showToast('â™¥ Ajouté aux favoris');
+
+}
+
+let btn=document.getElementById('heroHeart');
+
+si(btn)
+btn.textContent = wishlist.has(id)?'â™¥':'â™¡';
+
+}
+
+fonction changeQty(d){
+
+quantité=
+Math.max(
+1,
+Math.min(20,qty+d)
+);
+
+document.getElementById("pdQty").textContent=qty;
+
+}
+
+/* ========================================================
+   CAMION
+======================================================= */
+
+fonction ajouterAuPanier(id,q){
+
+soit p=
+PRODUITS.trouver(
+x=>String(x.id)===String(id)
+);
+
+si(!p)
+retour;
+
+soit existant=
+panier.trouver(
+x=>String(x.id)===String(id)
+);
+
+si (existant)
+existant.qty+=q;
+
+autre
+chariot.push({
+...p,
+quantité : q
+});
+
+mettre à jour le panier();
+
+showToast(q+"x ajouté au panier");
+
+}
+
+fonction updateCart(){
+
+soit n=
+panier.réduire(
+(s,x)=>s+x.quantité,
+0
+);
+
+cartCount.textContent=
+n+" "+t('articles_word');
+
+headerCartBadge.textContent=n;
+
+afficherPanier();
+
+}
+
+fonction renderCart(){
+
+si(!cart.length){
+
+cartItems.innerHTML=
+`
+<div class="notice"
+style="margin-top:12px;text-align:center">
+
+${t('cart_empty_notice')}
+
+</div>
+`;
+
+cartTotal.innerHTML="";
+
+retour;
+
+}
+
+cartItems.innerHTML =
+chariot.map((p,i)=>`
+
+<div class="item">
+
+<img src="${p.img}">
+
+<div class="item-main">
+
+<div class="item-title">
+${p.name}
+</div>
+
+<div class="item-price">
+
+${p.price.toFixed(2)}
+Ã— ${p.qty}
+=
+${(p.price*p.qty).toFixed(2)}
+
+</div>
+
+</div>
+
+<div class="cart-qty">
+
+< bouton
+onclick="cartChange(${i},-1)">
+un'
+</button>
+
+<b>${p.qty}</b>
+
+< bouton
+onclick="cartChange(${i},1)">
++
+</button>
+
+</div>
+
+</div>
+
+`).join("");
+
+soit total =
+panier.réduire(
+(s,p)=>s+p.prix*p.quantité,
+0
+);
+
+cartTotal.innerHTML=`
+
+<div class="total">
+
+<div class="total-line">
+
+<span>${t('total_word')}</span>
+
+<span class="prix-total">
+
+${total.toFixed(2)}
+
+</span>
+
+</div>
+
+<div class="meta">
+
+${t('vat_notice')}
+
+</div>
+
+< bouton
+classe="primaire"
+style="margin-top:10px"
+onclick="afficher('s'inscrire')">
+
+${t('checkout_btn')}
+
+</button>
+
+</div>
+
+`;
+
+}
+
+fonction cartChange(i,d){
+
+panier[i].qty+=d;
+
+si(cart[i].qty<1)
+chariot.splice(i,1);
+
+mettre à jour le panier();
+
+}
+
+/* ========================================================
+   NAVIGATION
+======================================================= */
+
+fonction afficher(nom){
+
+document
+.querySelectorAll(".view")
+.forEach(
+v=>v.classList.remove("active")
+);
+
+soit el=
+document.getElementById(nom);
+
+si(el)
+el.classList.add("active");
+
+document
+.querySelectorAll(".nav")
+.forEach(
+n=>n.classList.toggle(
+"actif",
+n.dataset.view===nom
+)
+);
+
+si(nom==="cart")
+afficherPanier();
+
+}
+
+/* ========================================================
+   RECHERCHE
+======================================================= */
+
+fonction rechercheProduits(){
+
+soit q=
+searchInput.valeur
+.garniture()
+.toLowerCase();
+
+rendre(
+q
+?PRODUITS.filtre(
+p=>
+(p.name+" "+p.cat+" "+p.desc)
+.toLowerCase()
+.includes(q)
+)
+:PRODUITS
+);
+
+afficher("maison");
+
+}
+
+fonction focusSearch(){
+
+afficher("maison");
+
+searchInput.focus();
+
+}
+
+/* ========================================================
+   ADRESSE
+======================================================= */
+
+fonction asynchrone addressInput(v){
+
+soit s=
+document.getElementById(
+« suggestions »
+);
+
+si (v.longueur < 2) {
+
+s.innerHTML='';
+
+retour;
+
+}
+
+soit a=[];
+
+si(MERCADO_CONFIG.placesEndpoint){
+
+essayer{
+
+soit r=
+attendre la récupération(
+MERCADO_CONFIG.placesEndpoint+
+'?q='+
+encodeURIComponent(v)
+);
+
+let d=await r.json();
+
+a=
+(d.items||d.results||[])
+.carte(
+x=>
+x.nom_affichage||
+x.adresse||
+x.nom
+)
+.filter(Booléen);
+
+}
+attraper(e){}
+
+}
+
+si(!a.length)
+
+a=
+LIEUX.filtre(
+x=>
+x.toLowerCase()
+.includes(v.toLowerCase())
+);
+
+s.innerHTML =
+a.tranche(0,8)
+.carte(
+x=>`
+
+<div
+classe="suggestion"
+onclick='selectAddress(${JSON.stringify(x)})'>
+
+ðŸ“ ${escapeHTML(x)}
+
+</div>
+
+`
+)
+.rejoindre("");
+
+}
+
+fonction selectAddress(x){
+
+adresse.valeur=x;
+
+ville.valeur=
+x.split(',')[0].trim();
+
+valeur du code postal='';
+
+adresseVérifiée=true;
+
+localStorage.setItem(
+'mercado_verified_address',
+x
+);
+
+localStorage.setItem(
+'mercado_verified_city',
+valeur de la ville
+);
+
+suggestions.innerHTML='';
+
+vérifié.style.display='en ligne';
+
+savedNotice.style.display='block';
+
+afficherToast(
+'âœ“ Adresse reconnue et inscrite'
+);
+
+}
+
+fonction restaurerAdresseEnregistrée(){
+
+/* Tout ce que le client a tapé (nom, téléphone, adresse, ville,
+code postal) est sauvegardé automatiquement à chaque frappe et
+restauré ici – même sans autocomplétion d'adresse (qui nécessite
+une clé API que MERCADO n'a pas forcement), rien n'est perdu. */
+if(name)name.value=localStorage.getItem('mercado_name')||'';
+if(phone)phone.value=localStorage.getItem('mercado_phone')||'';
+
+soit a=
+localStorage.getItem(
+'mercado_verified_address'
+)||
+localStorage.getItem('mercado_address_draft');
+
+si(a){
+
+adresse.valeur=a;
+
+ville.valeur=
+localStorage.getItem(
+'mercado_verified_city'
+)||
+localStorage.getItem('mercado_city_draft')||
+a.split(',')[0].trim();
+
+if(localStorage.getItem('mercado_verified_address')){
+adresseVérifiée=true;
+vérifié.style.display='en ligne';
+savedNotice.style.display='block';
+}
+
+}
+
+if(zip)zip.value=localStorage.getItem('mercado_zip_draft')||'';
+
+}
+
+fonction startNewSession(){
+
+/* Efface uniquement ce qui est stocké sur CET appareil (nom,
+email, adresse, panier...). Chaque téléphone à de toute façon
+son propre stockage séparé â€” personne d'autre ne peut voir ces
+informations – mais ce bouton permet de repartir de zéro sur un
+appareil partagé (démonstration, boutique, test). */
+
+let keysToKeep=['mercado_api_base'];
+
+Objet.clés(localStorage)
+.filter(k=>k.startsWith('mercado_')&&!keysToKeep.includes(k))
+.forEach(k=>localStorage.removeItem(k));
+
+panier=[];
+courant=null;
+emailVerified=false;
+adresseVérifiée=false ;
+
+location.recharger();
+
+}
+
+fonction saveDraftField(clé,valeur){
+try { localStorage.setItem(clé, valeur); } catch (e) {}
+}
+
+/* ========================================================
+   VÉRIFICATION PAR E-MAIL
+======================================================= */
+
+fonction asynchrone sendVerificationCode(){
+
+soit e=
+email.value.trim();
+
+si(
+!e||
+!e.includes('@')||
+email vérifié
+)
+retour;
+
+codeBox.style.display='block';
+
+codeInputs.innerHTML =
+[0,1,2,3]
+.carte(
+je=>`
+
+<input
+longueur maximale="1"
+mode_entrée="numérique"
+oninput="
+si(this.value&&this.nextElementSibling)
+this.nextElementSibling.focus()
+">
+
+`
+)
+.rejoindre("");
+
+codeStatus.textContent=
+'Envoi du code…';
+
+if(!MERCADO_CONFIG.emailSendEndpoint){
+
+codeStatus.textContent=
+'Service email réel non configuré. Renseignez mercado_email_send_endpoint pour envoyer le code par email.';
+
+retour;
+
+}
+
+essayer{
+
+soit r=
+attendre la récupération(
+MERCADO_CONFIG.emailSendEndpoint,
+{
+méthode : 'POST',
+en-têtes :{
+'Type de contenu' :
+'application/json'
+},
+corps:JSON.stringify({
+Courriel : e
+})
+}
+);
+
+si(!r.ok)
+lancer une nouvelle erreur();
+
+codeStatus.textContent=
+'âœ“ Code envoyé à votre email.';
+
+}
+attraper(e){
+
+codeStatus.textContent=
+'Impossible d'envoyer le code pour le moment.';
+
+}
+
+}
+
+fonction asynchrone verifyCode(){
+
+soit c=
+[
+...codeInputs
+.querySelectorAll('input')
+]
+.map(x=>x.value)
+.rejoindre('');
+
+si (!c||c.length!==4)
+retour;
+
+soit e=
+email.value.trim();
+
+if(!MERCADO_CONFIG.emailVerifyEndpoint){
+
+codeStatus.textContent=
+'Configurez l'endpoint de vérification réel. Le fichier ne simule pas une vérification.';
+
+retour;
+
+}
+
+essayer{
+
+soit r=
+attendre la récupération(
+MERCADO_CONFIG.emailVerifyEndpoint,
+{
+méthode : 'POST',
+en-têtes :{
+'Type de contenu' :
+'application/json'
+},
+corps:JSON.stringify({
+courriel:e,
+code:c
+})
+}
+);
+
+let d=await r.json();
+
+si(!r.ok||!d.verified)
+lancer une nouvelle erreur();
+
+emailVerified=true;
+
+localStorage.setItem(
+'mercado_email_verified',
+'vrai'
+);
+
+vérifié.style.display='en ligne';
+
+emailBadge.style.display='inline';
+
+codeStatus.innerHTML=
+'<span class="verify">âœ“ Email vÃ©rifiÃ©</span>';
+
+afficherToast(
+'✔ Vérification de l'email'
+);
+
+}
+attraper(e){
+
+codeStatus.textContent=
+'Code incorrect ou expiré.';
+
+}
+
+}
+
+/* ========================================================
+   LIVRAISON → ADRESSE
+======================================================= */
+
+fonction submitSignup(){
+
+si(
+!nom.valeur.trim()||
+!email.value.trim()
+){
+
+afficherToast(
+'Remplissez votre nom et email'
+);
+
+retour;
+
+}
+
+si(!emailVérifié){
+
+afficherToast(
+'Vérifiez votre email'
+);
+
+retour;
+
+}
+
+si (!adresse vérifiée){
+
+afficherToast(
+'Sélectionnez une adresse proposée'
+);
+
+retour;
+
+}
+
+addressReadout.textContent=
+
+nom.valeur+
+'\n'+
+adresse.valeur+
+'\nâœ“ Adresse vérifiée';
+
+afficher('addressView');
+
+}
+
+/* ========================================================
+   PAIEMENT
+======================================================= */
+
+fonction champsdepaiement(){
+
+soit m=
+payMethod.valeur;
+
+payFields.innerHTML =
+m!=="Virement bancaire"
+
+?`
+
+<div class="notice" style="border-color:var(--orange)">
+ðŸŸ En cliquant sur « Payer maintenant », vous serez redirigé vers
+une page de paiement sécurisé pour choisir votre crypto-monnaie
+(BTC, ETH, USDT…) et finaliser le paiement. Aucune donnée de
+le portefeuille n'est demandée sur MERCADO.
+</div>
+
+`
+
+:`
+
+<div class="notice" id="bankInfoBox" style="border-color:var(--green)">
+Chargement des coordonnées bancaires…
+</div>
+
+`;
+
+si(m==="Virement bancaire")
+chargerBankInfo();
+
+soit total=
+panier.réduire(
+(s,p)=>s+p.prix*p.quantité,
+0
+);
+
+paymentSecuritySlot.innerHTML=
+sécurité_paiement();
+
+payTotal.textContent=
+"Total : â‚¬"+
+total.toFixed(2);
+
+}
+
+fonction paymentSecurity(){
+
+retourner `
+
+<div class="payment-security">
+
+<div class="security-title">
+ðŸ”' Paiement sécurisé
+</div>
+
+<p>
+Les informations de paiement sont transmises directement au prestataire de paiement crypto connecté, ou affichées pour un virement bancaire manuel. MERCADO ne stocke ni ne voit jamais vos identifiants bancaires.
+</p>
+
+<div class="pay-icons">
+
+<span>‚¿ BTC</span>
+<span>Îž ETH</span>
+<span>USDT</span>
+<span>ðŸ ¦ Virement</span>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+fonction asynchrone chargerBankInfo(){
+
+let box=document.getElementById('bankInfoBox');
+
+if(!MERCADO_CONFIG.bankInfoEndpoint){
+si(boîte)boîte.textContent=
+'Coordonnées bancaires non configurées (bankInfoEndpoint).';
+retour;
+}
+
+essayer{
+
+let r=await fetch(MERCADO_CONFIG.bankInfoEndpoint);
+let d=await r.json();
+
+si(boîte)
+boîte.innerHTML=
+`ðŸ ¦ <b>Virement bancaire</b><br>
+Bénéficiaire : ${escapeHTML(d.beneficiary||'â€”')}<br>
+Banque : ${escapeHTML(d.bank||'—')}<br>
+IBAN : ${escapeHTML(d.iban||'â€”')}<br>
+BIC/SWIFT : ${escapeHTML(d.bic||'—')}<br>
+Référence à indication : sera affichée après validation de la commande.`;
+
+}
+attraper(e){
+si(boîte)boîte.textContent=
+'Impossible de charger les coordonnées bancaires pour le moment.';
+}
+
+}
+
+fonction buildOrderId(){
+retourner "MC-"+Math.floor(100000+Math.random()*900000);
+}
+
+fonction asynchrone payer(){
+
+si(!cart.length){
+
+afficherToast(t('panier_vide'));
+
+retour;
+
+}let orderId=buildOrderId();
+
+soit méthode=payMethod.value;
+
+soit ordre={
+
+orderId:orderId,
+
+articles:cart.map(p=>({
+id:p.id,
+nom:p.nom,
+image:p.img,
+desc:p.desc,
+prix:p.prix,
+quantité:p.qté,
+itemUrl:p.itemUrl||p.url||''
+})),
+
+client:{
+nom:(nom&&nom.valeur)||'',
+email:(email&&email.valeur)||'',
+téléphone:(téléphone&&téléphone.valeur)||'',
+adresse:(adresse&&adresse.valeur)||'',
+ville:(ville&&ville.valeur)||'',
+code postal:(code postal&&code postal.valeur)||'',
+pays:pays.valeur
+},
+
+méthode de paiement : méthode,
+
+total:cart.reduce((s,p)=>s+p.price*p.qty,0)
+
+};
+
+/* L'itemUrl (lien source du produit) part uniquement dans cet
+appel réseau vers votre backend – il n'est jamais affiché
+nulle part dans les pages du site. Le backend s'en sert pour
+composer le message WhatsApp envoyé au vendeur. */
+
+if(method!=="Virement bancaire"&&MERCADO_CONFIG.gatepayEndpoint){
+
+essayer{
+
+let r=await fetch(MERCADO_CONFIG.gatepayEndpoint,{
+méthode : 'POST',
+en-têtes : {'Content-Type':'application/json'},
+corps:JSON.stringify(ordre)
+});
+
+let d=await r.json().catch(()=>({}));
+
+si(r.ok&&d.checkoutUrl){
+
+essayer{
+attendre fetch(MERCADO_CONFIG.orderEndpoint,{
+méthode : 'POST',
+en-têtes : {'Content-Type':'application/json'},
+corps:JSON.stringify({
+...commande,
+Prestataire de paiement : « Gate Pay »,
+MerchantTradeNo:d.merchantTradeNo||null,
+statut : « EN ATTENTE »
+})
+});
+}catch(e){}
+
+location.href=d.checkoutUrl;
+
+retour;
+
+}
+
+showToast(d.error||"Paiement Gate Pay indisponible pour le moment.");
+retour;
+
+}
+attraper(e){
+
+showToast("Impossible de contacter Gate Pay pour le moment.");
+retour;
+
+}
+
+}
+
+si(MERCADO_CONFIG.orderEndpoint){
+
+essayer{
+
+attendre fetch(MERCADO_CONFIG.orderEndpoint,{
+méthode : 'POST',
+en-têtes : {'Content-Type':'application/json'},
+corps:JSON.stringify(ordre)
+});
+
+}catch(e){}
+
+}
+
+orderOut.textContent=
+ID de commande+
+"• MARCHÉ"+
+(méthode==="Virement bancaire"
+?"\nUn email va vous être envoyé avec les coordonnées bancaires et la référence de virement."
+:"\nRedirection vers Gate Pay : choisissez le moyen de paiement réellement disponible dans votre caisse.");
+
+/* Ceci alimente réellement l'inbox (MERCADO Inbox) – sans ça,
+elle restait toujours sur le message de bienvenue même après
+une commande. */
+let savedOrders=JSON.parse(localStorage.getItem('mercado_orders')||'[]');
+savedOrders.push({orderId:orderId,total:order.total,paymentMethod:method});
+localStorage.setItem('mercado_orders',JSON.stringify(savedOrders.slice(-20)));
+
+panier=[];
+
+mettre à jour le panier();
+
+renderInbox();
+
+afficher("confirmer");
+
+}
+
+/* ========================================================
+   BOÎTE DE RÉCEPTION
+======================================================= */
+
+fonction renderInbox(){
+
+/* On ne montre plus de fausses notifications ("nouveau produit
+trouvé pour votre recherche" alors qu'aucune recherche n'a été
+faite). L'inbox reflète maintenant uniquement ce qui s'est
+réellement passé dans MERCADO : vos commandes et vos demandes
+d'alerte disponibilitÃ©. */
+
+let items=[];
+
+soit commandes=
+JSON.parse(localStorage.getItem('mercado_orders')||'[]');
+
+orders.slice(-10).reverse().forEach(o=>{
+articles.push([
+"ðŸ“¦",
+"Commande "+o.orderId,
+"Total €"+Number(o.total||0).toFixed(2)+" • "+o.paymentMethod
+]);
+});
+
+soit subs=
+JSON.parse(localStorage.getItem('mercado_notify_subs')||'[]');
+
+subs.slice(-10).reverse().forEach(s=>{
+articles.push([
+"ðŸ""",
+"Alerte disponibilité activée",
+'Vous serez averti(e) par email pour "'+s+'".'
+]);
+});
+
+si (!items.length){
+articles.push([
+"âœ¨",
+"Bienvenue sur MERCADO",
+"Vos commandes et vos alertes disponibilité apparaissent ici."
+]);
+}
+
+soit realCount=orders.length+subs.length;
+
+si(inboxBadge){
+si(compteurréel>0){
+inboxBadge.style.display='flex';
+inboxBadge.textContent=realCount>9?'9+':realCount;
+}autre{
+inboxBadge.style.display='none';
+}
+}
+
+inboxCount.textContent=
+articles.longueur>1
+?items.length+" nouvelles"
+:items.length+" nouvelle";
+
+inboxList.innerHTML=éléments
+
+.carte(
+x=>`
+
+<div class="boîte de réception">
+
+<div class="inbox-title">
+${x[0]} ${x[1]}
+</div>
+
+<div class="inbox-body">
+${x[2]}
+</div>
+
+</div>
+
+`
+)
+.rejoindre("");
+
+}
+
+/* ========================================================
+   PARTAGER
+======================================================= */
+
+fonction partagerNative(){
+
+si(navigateur.partager){
+
+navigateur.partager({
+
+titre:
+nom actuel||
+"MERCADO",
+
+texte:
+actuel
+?`Découvrez ${current.name} sur MERCADO â‚¬${current.price.toFixed(2)}`
+:"Découvrez MERCADO",
+
+URL :
+actuel?.itemUrl||
+location.href
+
+})
+.catch(()=>{});
+
+}
+autre{
+
+afficherToast(
+"Partage natif non disponible"
+);
+
+}
+
+}
+
+fonction partagerWhatsApp(){
+
+soit lien=
+actuel?.itemUrl||
+emplacement.href;
+
+soit texte =
+(actuel
+?`Découvrez ${current.name} sur MERCADO â‚¬${Number(current.price||0).toFixed(2)}`
+:"Découvrez MERCADO")+
+" — "+lien;
+
+soit url =
+"https://api.whatsapp.com/send?text="+
+encodeURIComponent(texte);
+
+let win = window.open(url,'_blank','noopener');
+
+si(!gagner){
+
+showToast('Autoriser les pop-ups pour ouvrir WhatsApp, ou utiliser "Autres"');
+
+}
+
+}
+
+fonction partagerFacebook(){
+
+fenêtre.ouvrir(
+"https://www.facebook.com/sharer/sharer.php?u="+
+encodeURIComponent(current?.itemUrl||location.href),
+"_vide"
+);
+
+}
+
+fonction openShareModal(){
+
+soit boîte=
+document.getElementById(
+"shareModal"
+);
+
+si(!boîte){
+
+boîte=
+document.createElement('div');
+
+boîte.id="shareModal";
+
+boîte.className=
+"partager-modal";
+
+boîte.innerHTML=`
+
+<div class="share-sheet">
+
+<div class="share-head">
+
+<b>Partager</b>
+
+< bouton
+onclick="closeShareModal()">
+âœ•
+</button>
+
+</div>
+
+<div class="share-grid">
+
+< bouton
+onclick="shareWhatsApp()">
+<span>ðŸŸ¢</span>
+WhatsApp
+</button>
+
+< bouton
+onclick="shareFacebook()">
+<span>ðŸ”µ</span>
+Facebook
+</button>
+
+< bouton
+onclick="shareNative()">
+<span>âœˆï¸ </span>
+Autres
+</button>
+
+< bouton
+onclick="shareNative()">
+<span>ðŸŽµ</span>
+TikTok
+</button>
+
+< bouton
+onclick="shareNative()">
+<span>âœ‰ï¸ </span>
+E-mail
+</button>
+
+< bouton
+onclick="copyCurrentLink()">
+<span>ðŸ”—</span>
+Copier le lien
+</button>
+
+</div>
+
+</div>
+
+`;
+
+document.body.appendChild(boîte);
+
+}
+
+boîte.classList.add("show");
+
+}
+
+fonction closeShareModal(){
+
+document
+.getElementById("shareModal")
+?.classList.remove("show");
+
+}
+
+fonction asynchrone copyCurrentLink(){
+
+essayer{
+
+attendre navigator.clipboard.writeText(
+location.href
+);
+
+afficherToast("Lien copie");
+
+}
+attraper(e){
+
+afficherToast(
+« Exemplaire indisponible »
+);
+
+}
+
+}
+
+/* ========================================================
+   PAIEMENT DIRECT (à régler uniquement pour ce produit)
+======================================================= */
+
+fonction payDirect(){
+
+si(!actuel)
+retour;
+
+soit existant=
+panier.trouver(
+x=>String(x.id)===String(current.id)
+);
+
+si (existant)
+quantité existante = quantité;
+
+autre
+chariot.push({
+...actuel,
+quantité : quantité
+});
+
+mettre à jour le panier();
+
+afficher('inscription');
+
+}
+
+/* ========================================================
+   ACHETER
+======================================================= */
+
+fonction acheterProduit(){
+
+si(!actuel)
+retour;
+
+soit u=
+current.itemUrl||
+URL actuelle ||
+'';
+
+si(!u){
+
+afficherToast(
+"Lien d'achat non disponible dans le catalogue"
+);
+
+retour;
+
+}
+
+essayer{
+
+soit x=
+nouvelle URL(u,location.href);
+
+x.searchParams.set(
+'utm_source',
+'marcado'
+);
+
+x.searchParams.set(
+'utm_medium',
+'filiale'
+);
+
+fenêtre.ouvrir(
+x.toString(),
+'_vide',
+'noopener'
+);
+
+}
+attraper(e){
+
+fenêtre.ouvrir(u,'_blank');
+
+}
+
+}
+
+/* ========================================================
+   CAMÉRA
+======================================================= */
+
+laisser cameraStream=null;
+
+fonction asynchrone ouvrir le menu photo(){
+
+photoMenu.classList.add('show');
+
+cameraFallbackNotice.style.display='none';
+
+cameraVideo.style.display='block';
+
+/* Les navigateurs intégrés (ouverture du lien depuis Messenger,
+Facebook, Instagram...) bloque très souvent la caméra et la
+galerie, sans qu'aucun code ne puisse le contourner. Sur le
+détecter et on prévient clairement plutôt que de laisser
+l'utilisateur croit à un bug silencieux. */
+soit ua=navigator.userAgent||'';
+soit inAppBrowser=
+/FBAN|FBAV|Instagram|Messenger|Line\//i.test(ua);
+
+si(inAppBrowser){
+
+cameraVideo.style.display='none';
+
+cameraFallbackNotice.style.display='block';
+
+cameraFallbackNotice.innerHTML=
+"ðŸ“· La caméra et parfois la galerie ne fonctionne pas correctement "+
+"depuis le navigateur intégré de Messenger/Facebook/Instagram. "+
+'Touchez le menu "â‹¯" en haut à droite puis <b>Â« Ouvrir dans le navigateur Â»</b> '+
+"pour un fonctionnement garanti.";
+
+retour;
+
+}
+
+if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+
+cameraVideo.style.display='none';
+
+cameraFallbackNotice.style.display='block';
+
+retour;
+
+}
+
+/* Dans certaines applications (navigateur intégré à Messenger,
+Facebook, Instagram...), l'accès direct à la caméra est bloqué
+ou reste bloqué en attente sans jamais répondre. En limite donc
+l'attente à 4 secondes puis on bascule automatiquement sur le
+bouton "Prendre une photo", qui utilise l'appareil photo natif
+du téléphone et fonctionne presque partout. */
+soit timedOut=false ;
+
+let timeoutId=setTimeout(()=>{
+
+délai dépassé=true ;
+
+cameraVideo.style.display='none';
+
+cameraFallbackNotice.style.display='block';
+
+},4000);
+
+essayer{
+
+flux caméra=
+attendre navigator.mediaDevices.getUserMedia({
+
+vidéo:{
+facingMode:{
+idéal : « environnement »
+}
+},
+
+audio:false
+
+});
+
+effacerTimeout(timeoutId);
+
+si(délai dépassé){
+
+// L'utilisateur a déjà basculé sur le mode natif : on arrêté
+// simplement le flux obtenu trop tard, sans rouvrir l'apéritif.
+cameraStream.getTracks().forEach(t=>t.stop());
+flux caméra=null;
+retour;
+
+}
+
+cameraVideo.srcObject=
+flux vidéo de la caméra ;
+
+}
+attraper(e){
+
+effacerTimeout(timeoutId);
+
+cameraVideo.style.display='none';
+
+cameraFallbackNotice.style.display='block';
+
+showToast('Aperú caméra indisponible ici â€” utiliser "Prendre une photo"');
+
+}
+
+}
+
+fonction closePhotoMenu(){
+
+si(caméraStream){
+
+flux vidéo de la caméra
+.getTracks()
+.forEach(
+t=>t.stop()
+);
+
+flux caméra=null;
+
+}
+
+photoMenu.classList.remove('show');
+
+}
+
+fonction utiliserCaméra(){
+
+ouvrir le menu photo();
+
+}
+
+fonction utiliserGallery(){
+
+soit ua=navigator.userAgent||'';
+
+if(/FBAN|FBAV|Instagram|Messenger|Line\//i.test(ua)){
+
+showToast('Galerie limitée dans ce navigateur intégré – touchez "â‹¯" puis "Ouvrir dans le navigateur" pour un accès garanti.');
+
+}
+
+essayer{
+
+galleryInput.value='';
+
+galleryInput.click();
+
+}
+attraper(e){
+
+showToast("Impossible d'ouvrir la galerie ici – réessayez ou utilisez la caméra.");
+
+}
+
+}
+
+fonction captureCamera(){
+
+if(!cameraStream||!cameraVideo.videoWidth){
+
+cameraInput.click();
+
+retour;
+
+}
+
+cameraCanvas.width=
+cameraVideo.videoWidth;
+
+cameraCanvas.hauteur=
+cameraVideo.videoHeight;
+
+caméraCanvas
+.getContext('2d')
+.dessinerImage(
+caméraVidéo,
+0,
+0
+);
+
+photoPickedData(
+cameraCanvas.toDataURL(
+'image/jpeg',
+.9
+)
+);
+
+fermer le menu photo();
+
+}
+
+fonction photoPicked(e){
+
+soit f=
+e.target.files?.[0];
+
+si(!f)
+retour;
+
+soit r=
+nouveau FileReader();
+
+r.onload=
+ev=>{
+fermer le menu photo();
+photoPickedData(
+ev.target.result
+);
+};
+
+r.readAsDataURL(f);
+
+}
+
+fonction photoPikedData(img){
+
+photoPreview.innerHTML=`
+
+<img
+src="${img}"
+alt="Photo">
+
+<p
+style="font-size:11px;color:var(--dim)">
+
+Photo prête pour la recherche visuelle MERCADO.
+
+</p>
+
+< bouton
+classe="primaire"
+onclick="runVisualSearch()">
+
+ðŸ” Rechercher cette image
+
+</button>
+
+< bouton
+classe="btn btn-view"
+style="largeur:100%;marge-haut:7px"
+onclick="photoPreview.classList.remove('show')">
+
+Fermer
+
+</button>
+
+`;
+
+photoPreview.classList.add('show');
+
+}
+
+fonction asynchrone runVisualSearch(){
+
+if(!MERCADO_CONFIG.visualSearchEndpoint){
+
+afficherToast(
+"Recherche visuelle prête – connectez votre API visuelle."
+);
+
+retour;
+
+}
+
+soit img=
+Aperçu de la photo
+.querySelector('img')
+?.src;
+
+essayer{
+
+soit r=
+attendre la récupération(
+MERCADO_CONFIG.visualSearchEndpoint,
+{
+méthode : 'POST',
+en-têtes :{
+'Type de contenu' :
+'application/json'
+},
+corps:JSON.stringify({
+
+imageDataUrl:img,
+
+pays:pays.valeur,
+
+langue:langue.valeur
+
+})
+}
+);
+
+let d=await r.json();
+
+PRODUITS=
+d.articles||
+d.produits||
+[];
+
+rendre(PRODUITS);
+
+photoPreview.classList.remove(
+'montrer'
+);
+
+afficher('maison');
+
+}
+attraper(e){
+
+afficherToast(
+"Recherche visuelle indisponible"
+);
+
+}
+
+}
+
+/* ========================================================
+   MERCADO AI DEEP
+======================================================= */
+
+soit aiOpen=false;
+
+si(aiInput){
+
+aiInput.addEventListener('focus',()=>{
+
+setTimeout(()=>{
+
+aiInput.scrollIntoView({block:'center',behavior:'smooth'});
+
+},250);
+
+});
+
+}
+
+fonction basculeAI(){
+
+aiOpen=!aiOpen;
+
+aiBox.classList.toggle(
+'montrer',
+aiOpen
+);
+
+si(
+aiOpen&&
+!aiMsg.enfants.longueur
+)
+bienvenueIA();
+
+mettre à jour le contexte AI();
+
+}
+
+fonction bienvenueAI(){
+
+aiMsg.innerHTML=`
+
+<div class="msg bot">
+
+Bonjour ðŸ'‹ Je suis MERCADO AI.
+
+Je peux répondre à deux types de questions :
+
+ðŸ› ï¸ Sur MERCADO : analyse d'un produit, prix, livraison, comparaison, paiement, votre commande...
+ðŸŒ En dehors de MERCADO : posez-moi n'importe quelle question générale, comme un assistant classique.
+
+Dites-moi simplement ce dont vous avez besoin.
+
+</div>
+
+`;
+
+}
+
+fonction updateAIContext(){
+
+aiGrounding.innerHTML=`
+
+<span class="ground-chip">
+
+Produit :
+${actuel
+?escapeHTML(current.name).slice(0,28)
+:'aucun'}
+
+</span>
+
+<span class="ground-chip">
+
+Prix ​​:
+${actuel
+?'â‚¬'+Number(current.price||0).toFixed(2)
+:'—'}
+
+</span>
+
+<span class="ground-chip">
+
+Pays :
+${pays.valeur}
+
+</span>
+
+<span class="ground-chip">
+
+Catalogue:
+${PRODUCTS.length}
+
+</span>
+
+`;
+
+aiInput.placeholder=
+actuel
+?'Question sur '+current.name+'…'
+:'Posez votre question à MERCADO AI…';
+
+}
+
+fonction askAI(p){
+
+soit q=
+(p||
+aiInput.value)
+.garniture();
+
+si(!q)
+retour;
+
+ajouterIA(
+'utilisateur',
+q
+);
+
+aiInput.value='';
+
+définirTimeout(
+()=>deepAI(q),
+220
+);
+
+}
+
+fonction ajouterIA(rôle,t){
+
+soit d=
+document.createElement('div');
+
+d.className=
+'msg '+rôle;
+
+d.textContent=t;
+
+aiMsg.appendChild(d);
+
+aiMsg.scrollTop=
+aiMsg.scrollHeight;
+
+}
+
+/* ========================================================
+   IA PROFONDE + POINT DE FIN
+======================================================= */
+
+soit aiConversation=[];
+
+fonction asynchrone deepAI(q){
+
+ajouterIA(
+'bot',
+'…'
+);
+
+aiConversation.push({role:'user',content:q});
+
+/* MERCADO AI fonctionne comme un assistant général (type "mini
+Meta AI") : il répond aussi bien aux questions sur un produit /
+une commande MERCADO qu'à n'importe quelle question hors site.
+Tout part vers le backend (/api/ai), qui appelle un vrai modèle
+de langage – la clé API reste côté serveur (Render). */
+
+si(MERCADO_CONFIG.aiEndpoint){
+
+essayer{
+
+soit r=
+attendre la récupération(
+MERCADO_CONFIG.aiEndpoint,
+{
+méthode : 'POST',
+en-têtes :{
+'Type de contenu' :
+'application/json'
+},
+corps:JSON.stringify({
+
+question:q,
+
+historique:aiConversation.slice(-10),
+
+produit:actuel||null,
+
+quantité:actuelle?qty:null,
+
+pays:pays.valeur,
+
+langue:langue.valeur,
+
+contexte:{
+Taille du catalogue :
+PRODUITS.longueur
+}
+
+})
+}
+);
+
+soit d=
+attendre r.json();
+
+si(
+r.ok&&
+d.réponse
+){
+
+aiMsg.lastChild.remove();
+
+ajouterIA(
+'bot',
+d.réponse
+);
+
+aiConversation.push({role:'assistant',content:d.answer});
+
+retour;
+
+}
+
+console.warn('Erreur MERCADO AI :',d.error||r.status);
+
+}
+attraper(e){
+
+console.warn('Échec de la récupération de l'IA MERCADO :',e);
+
+}
+
+}
+
+aiMsg.lastChild.remove();
+
+soit réponse=localAI(q);
+
+ajouterIA(
+'bot',
+répondre
+);
+
+aiConversation.push({role:'assistant',content:answer});
+
+/* On journalise silencieusement la question côté backend
+(sans jamais informer le client que l'IA générale n'est pas
+connectée), pour que vous restiez informé(e) de ce qui est
+demande. */
+si(MERCADO_CONFIG.aiLogEndpoint){
+
+récupérer(MERCADO_CONFIG.aiLogEndpoint,{
+méthode : 'POST',
+en-têtes : {'Content-Type':'application/json'},
+corps:JSON.stringify({
+question:q,
+produit:actuel?{nom:current.nom,prix:current.prix}:null,
+client:{email:(email&&email.valeur)||''},
+pays:pays.valeur,
+langue:langue.valeur
+})
+}).catch(()=>{});
+
+}
+
+}
+
+/* ========================================================
+   MOTEUR LOCAL "INTELLIGENT" – SANS AUCUNE API IA
+   Utilisé automatiquement si aucun backend IA n'est
+   connecté (ou s'il ne répond pas). Comprendre le type de
+   question posée et répondre avec les vraies données du
+   site (produit ouvert, panier, catalogue, pays, moyens
+   de paiement) plutôt qu'un texte figé toujours identique.
+======================================================= */
+
+fonction localAI(q){
+
+let l=q.toLowerCase().trim();
+
+// 1) Salutations / politesse
+if(/^(salut|bonjour|bonsoir|hello|salut|hey|coucou)\b/.test(l)){
+return "Bonjour ðŸ'‹ Je peux répondre sur un produit, votre panier, la livraison, le paiement, ou faire un petit calcul. Que voulez-vous savoir ?";
+}
+si(/merci/.test(l)){
+return "Avec plaisir ðŸ™‚ Autre choix ?";
+}
+
+// 2) Calcul mathématique simple ("2+2", "combien font 15*3", etc.)
+soit mathExpr=l
+.replace(/combien (fait|font|côte|coût)/g,'')
+.replace(/[^0-9+\-*/.,() ]/g,'')
+.remplacer(/,/g,'.')
+.garniture();
+if(mathExpr && /[0-9]/.test(mathExpr) && /[+\-*/]/.test(mathExpr) && /^[0-9+\-*/.() ]+$/.test(mathExpr)){
+essayer{
+// eslint-disable-next-line no-new-func
+let val=Function('"use strict";return ('+mathExpr+')')();
+si (type de val === 'nombre' && est fini(val)) {
+renvoie "= "+ (Math.round(val*10000)/10000);
+}
+}catch(e){}
+}
+
+// 3) Date / heure
+if(/quelle (heure|date)|quel jour/.test(l)){
+let now=new Date();
+return "Nous sommes le "+now.toLocaleDateString(lang.value||'fr-FR')+
+", il est "+now.toLocaleTimeString(lang.value||'fr-FR',{hour:'2-digit',minute:'2-digit'})+
+" (heure de votre appareil).";
+}
+
+// 4) Panier / commande
+if(/panier|mon commande|ma commande|total/.test(l)){
+si(!cart.length)
+return "Votre panier MERCADO est vide pour le moment.";
+let total=cart.reduce((s,p)=>s+p.price*p.qty,0).toFixed(2);
+let lines=cart.map(p=>`• ${p.name} → â‚¬${Number(p.price).toFixed(2)} x${p.qty}`).join('\n');
+return `Votre panier contient ${cart.length} article(s) :\n${lines}\n\nTotal : â‚¬${total}`;
+}
+
+// 5) Paiement
+if(/paiement|payer|gate pay|carte|apple pay|google pay|coingate|crypto|virement|bancaire/.test(l)){
+return "MERCADO propose Gate Pay pour les moyens affichés par votre caisse (carte, Apple Pay, Google Pay, crypto, selon disponibilité) et le virement bancaire. Le paiement Gate Pay est traité sur la page sécurisée de Gate Pay.";
+}
+
+// 6) Livraison
+if(/livraison|shipping|délai|expédition/.test(l)){
+soit c=country.options[country.selectedIndex]?.text||country.value;
+retour courant
+?`Pour "${current.name}", la livraison dépend du vendeur et de votre pays (${c}). ${current.shipping?('Info catalogue : '+current.shipping+'.'):"Le délai exact n'est pas fourni dans le catalogue actuel."}`
+:`La livraison dépend du vendeur et de votre pays (actuellement ${c}). Ouvrez un produit pour voir ses informations de livraison si disponibles.`;
+}
+
+// 7) Avis / comment laisser un avis
+if(/avis|review|commentaire/.test(l)){
+si(actuel)
+return `Vous pouvez laisser votre avis directement sous "${current.name}" – notez de 1 à 5 étoiles et ajoutez un commentaire, il sera visible par tous les visiteurs.`;
+return "Ouvrez un produit puis faites défiler jusqu'à la section avis pour en laisser un ou lire ceux des autres clients.";
+}
+
+// 7bis) Produit ouvert : prix / note / description / stock
+si(actuel){
+
+if(/prix|coût|coute|combien.*(côte|vaut)/.test(l)){
+return `${current.name} coÃ»te â‚¬${Number(current.price||0).toFixed(2)}.`;
+}
+si(/note|avis|rating|Étoile/.test(l)){
+renvoyer la note actuelle
+?`${current.name} une note de ${current.rating}${current.sold?(' pour '+current.sold+' ventes'):''}.`
+:`Aucune note n'est fournie pour ${current.name} dans le catalogue actuel.`;
+}
+if(/description|caractéristique|c'est quoi|qu'est-ce/.test(l)){
+return current.desc||`Aucune description détaillée n'est fournie pour ${current.name}.`;
+}
+if(/qualité.*prix|value|worth/.test(l)){
+return `Ã€ â‚¬${Number(current.price||0).toFixed(2)}${current.rating?(' et une note de '+current.rating):''}, le rapport qualité/prix semble correct sur la base des données disponibles â€” mais je ne peux pas le garantir sans les caractéristiques complètes du vendeur.`;
+}
+si(/compar/.test(l)){
+let alts=PRODUITS
+.filter(p=>p.id!==current.id&&p.cat===current.cat)
+.sort((a,b)=>(b.rating||0)-(a.rating||0))
+.tranche(0,3);
+si(!alts.length)
+return "Je n'ai pas d'autre produit de la même catégorie dans le catalogue actuellement chargé pour comparer.";
+return "Alternatives dans la même catégorie :\n"+
+alts.map(p=>`• ${p.name} — â‚¬${Number(p.price).toFixed(2)}${p.rating?(' â '+p.rating):''}`).join('\n');
+}
+}
+
+// 8) Recherche générale dans le catalogue ("avez-vous...", "cherche...")
+let searchMatch=l.match(/(cherch\w*|trouv\w*|avez[- ]vous|vendez[- ]vous)\s+(.+)/);
+si(rechercheCorrespondance){
+let term=searchMatch[2].trim();
+let hits=PRODUCTS.filter(p=>p.name.toLowerCase().includes(term)).slice(0,3);
+si(hits.length)
+return `J'ai trouvé ${hits.length} produit(s) : `+hits.map(p=>`${p.name} (â‚¬${Number(p.price).toFixed(2)})`).join(', ')+
+". Ouvrez la recherche pour voir tous les résultats.";
+return `Je n'ai rien trouvé pour "${term}" dans le catalogue actuellement chargé. Essayez la barre de recherche, ou inscrivez-vous pour être averti(e) quand ce sera disponible.`;
+}
+
+// 9) Répli général – sans jamais révéler qu'aucune IA générale
+// n'est connectée : on reste utile et positif sur ce qu'on peut faire.
+return "Je peux vous aider sur : ce produit (prix, note, description, comparaison), votre panier, la livraison, les moyens de paiement, une recherche dans le catalogue, un calcul rapide, ou l'heure/date. Sur quoi voulez-vous que je vous aide ?";
+
+}
+
+/* ========================================================
+   GRILLER
+======================================================= */
+
+/* ========================================================
+   PORTAIL DE CONFIANCE
+======================================================= */
+
+laisser trustPending=null;
+let trustShownThisSession=false;
+
+fonction openTrustGate(action){
+
+si(trustShownThisSession){
+
+action();
+
+retour;
+
+}
+
+confianceEnAttendu=action;
+
+trustModal.classList.add('show');
+
+}
+
+fonction closeTrustGate(proceed){
+
+trustModal.classList.remove('show');
+
+si(procéder){
+
+trustShownThisSession=true;
+
+si (confiance en attente)
+confianceEnattente();
+
+}
+
+confianceEnAttendance=null;
+
+}
+
+fonction showToast(msg){
+
+const t=
+document.getElementById(
+'griller'
+);
+
+t.innerText=msg;
+
+t.classList.add('show');
+
+définirTimeout(
+()=>t.classList.remove('show'),
+3500
+);
+
+}
+
+/* ========================================================
+   BANNIÈRE
+======================================================= */
+
+soit bannerIndex=0;
+
+définirIntervalle(()=>{
+
+const slides=
+document.querySelectorAll(
+'.banner-slide'
+);
+
+const dots=
+document.querySelectorAll(
+'.banner-dot'
+);
+
+diapositives.pourChaque(
+s=>s.classList.remove('active')
+);
+
+points.pourChaque(
+d=>d.classList.remove('active')
+);
+
+bannièreIndex=
+(bannerIndex+1)%slides.length;
+
+diapositives[bannerIndex]
+.classList.add('active');
+
+points[bannerIndex]
+.classList.add('active');
+
+},5000);
+
+/* ========================================================
+   COMMENCER
+======================================================= */
+
+fenêtre.ajouterEventListener(
+'avant le déchargement',
+()=>{
+
+localStorage.setItem(
+'mercado_email',
+email.valeur||''
+);
+
+}
+);
+
+init();
+
+</script>
+
+</body>
+</html>
